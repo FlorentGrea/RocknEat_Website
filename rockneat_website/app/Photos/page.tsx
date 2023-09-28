@@ -44,17 +44,17 @@ function Photos({ photos }: any) {
     const { id, type, img_saved } = photos || {};
 
     return (
-            <div>
-                <h1>
-                    {type}
-                </h1>
-                <Image
-                    src={'http://127.0.0.1:8090/api/files/Photos/' + id + '/' + img_saved}
-                    //src='https://d150u0abw3r906.cloudfront.net/wp-content/uploads/2021/10/image2-2-1024x649.png'
-                    width={500}
-                    height={500}
-                    alt={type}
-                />
-            </div>
+        <div>
+            <h1>
+                {type}
+            </h1>
+            <Image
+                src={'http://127.0.0.1:8090/api/files/Photos/' + id + '/' + img_saved}
+                //src='https://d150u0abw3r906.cloudfront.net/wp-content/uploads/2021/10/image2-2-1024x649.png'
+                width={500}
+                height={500}
+                alt={type}
+            />
+        </div>
     )
 }
