@@ -22,6 +22,9 @@ export default function RootLayout({
             </Link>
           </div>
           <nav>
+            <Link href="/">
+              Programmation
+            </Link>
             <Link href="/Billeterie">
               Billeterie
             </Link>
