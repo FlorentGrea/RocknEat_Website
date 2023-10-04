@@ -13,6 +13,8 @@
     "@fullcalendar/daygrid": "^6.1.9",
     "@fullcalendar/react": "^6.1.9",
     "@headlessui/react": "^1.7.17",
+    "@react-google-maps/api": "^2.19.2",
+    "@types/google.maps": "^3.54.3",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
