@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import GoogleMapView from './GoogleMapView';
+import GoogleMapView from '../components/client components/GoogleMapView';
 
 export default async function InfosPage() {
     const address = '32 Quai Arloing, Lyon, France';

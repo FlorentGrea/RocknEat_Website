@@ -13,7 +13,7 @@ export default function GoogleMapView() {
     return (
         <div>
             <LoadScript
-                googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}
+                googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY!} 
             >
                 <GoogleMap
                     mapContainerStyle={mapContainer}
