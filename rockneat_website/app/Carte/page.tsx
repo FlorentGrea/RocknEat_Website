@@ -11,7 +11,7 @@ export default async function CartePage() {
     const items = await getCarte();
 
     return (
-        <div>
+        <div className='flex flex-col m-auto'>
             <h1>La carte</h1>
             <div>
                 <h1>Beer</h1>

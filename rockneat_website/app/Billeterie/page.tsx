@@ -13,7 +13,7 @@ export default async function BilleteriePage() {
     const tickets = await getTicketing();
 
     return (
-        <div>
+        <div className='flex flex-col m-auto'>
             <h1>Billeterie</h1>
             <div>
                 {tickets?.map((ticket) => {

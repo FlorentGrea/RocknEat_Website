@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/Infos/googleMapsLoader.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/Infos/googleMapsLoader.jsx", "app/components/client components/Carousel.jsx"],
   "exclude": ["node_modules"]
 }

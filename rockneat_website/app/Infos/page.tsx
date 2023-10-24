@@ -5,7 +5,7 @@ export default async function InfosPage() {
     const address = '32 Quai Arloing, Lyon, France';
 
     return (
-        <div>
+        <div className='flex flex-col m-auto'>
             <h1>Infos</h1>
             <div>
                 <h2>Contact</h2>

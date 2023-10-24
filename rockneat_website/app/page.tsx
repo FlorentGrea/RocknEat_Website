@@ -13,7 +13,7 @@ export default async function HomePage() {
   const db_events = await getEvents();
 
   return (
-      <div>
+      <div className='flex flex-col'>
           <h1>Le Rock n&apos;Eat est ouvert de 16h à 4h en fonction des soirs d&apos;évènements :</h1>
           <Calendar db_events={db_events}/>
       </div>
