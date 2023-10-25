@@ -38,12 +38,12 @@ const config: Config = {
         "70": "70%",
         "80": "80%",
         "90": "90%",
-      }
+      },
+      colors: {
+        "red": "#fb0301",
+        "black": "#000000",
+      },
     },
-    colors: {
-      "red": "#fb0301",
-      "black": "#000000"
-    }
   },
   plugins: [
     require("flowbite/plugin")

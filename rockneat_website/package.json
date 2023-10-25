@@ -19,7 +19,8 @@
     "flowbite-react": "^0.6.4",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-easy-swipe": "^0.0.23"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",

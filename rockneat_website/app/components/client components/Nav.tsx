@@ -6,9 +6,11 @@ import { usePathname } from 'next/navigation'
 
 export default function Nav () {
     const currentRoute = usePathname()
+
     const navTextStyle = 'block px-3 hover:text-red '
     const activeTextStyle = navTextStyle + 'text-red'
     const nonActiveTextStyle = navTextStyle + 'text-white'
+
     const navIconStyle = "object-contain m-auto "
     const activeIconStyle = navIconStyle + 'filter-red'
     const nonActiveIconStyle = navIconStyle + 'filter-white'
