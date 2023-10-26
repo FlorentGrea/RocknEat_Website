@@ -5,8 +5,8 @@ import React from "react";
 
 export default function GoogleMapView() {
     const mapContainer = {
-        width:'20%',
-        height:'30vh'
+        width:'100%',
+        height:'25vh'
     }
     const coordinates = { lat: 45.77103585584342, lng: 4.81163122686791 }
 

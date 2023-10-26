@@ -21,7 +21,7 @@ export default function RootLayout({
           name="Rock n'Eat Live"
           content="Salle de concert rock" 
         />
-        <link rel="icon" href="/Rockneat_img.webp" />
+        <link rel="icon" href="/Rockneat_img.webp"/>
       </Head>
       <body>
         <Header />

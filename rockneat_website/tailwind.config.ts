@@ -41,6 +41,7 @@ const config: Config = {
       },
       colors: {
         "red": "#fb0301",
+        "red-b": "#fb010193",
         "black": "#000000",
       },
     },

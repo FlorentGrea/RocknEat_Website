@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import CarouselSlider from '../components/client components/Carousel';
 
 async function getPhotos() {
