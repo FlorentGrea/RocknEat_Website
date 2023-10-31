@@ -35,3 +35,35 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #fb010193;
 }
+
+.clip {
+  clip-path: polygon(0 100%, 0 100%, 0 100%, 0% 100%);
+}
+
+.fc-day-sun {
+  background-color: black;
+}
+
+.fc-day-mon {
+  background-color: black;
+}
+
+.fc-day-tue {
+  background-color: black;
+}
+
+.fc-day-wed {
+  background-color: black;
+}
+
+.fc-day-thu {
+  background-color: black;
+}
+
+.fc-day-fri {
+  background-color: black;
+}
+
+.fc-day-sat {
+  background-color: black;
+}

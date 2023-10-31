@@ -1,4 +1,4 @@
-import Calendar from './components/client components/Calendar';
+import Calendar from './components/client components/NewCalendar';
 
 async function getEvents() {
   const res = await fetch(

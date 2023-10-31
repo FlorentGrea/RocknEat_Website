@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-[url('/bgtest.webp')] bg-fixed bg-cover bg-top">
       <Head>
         <title>Rock n'Eat Live</title>
         <meta
@@ -26,7 +26,7 @@ export default function RootLayout({
       <body>
         <Header />
         <Nav />
-        <main id="Nav" className='max-w-80 lg:max-w-60 m-auto'>
+        <main className='max-w-80 z-10 lg:max-w-60 m-auto'>
           {children}
         </main>
       </body>

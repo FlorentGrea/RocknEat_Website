@@ -17,6 +17,7 @@
     "@types/google.maps": "^3.54.3",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.6.4",
+    "moment": "^2.29.4",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",

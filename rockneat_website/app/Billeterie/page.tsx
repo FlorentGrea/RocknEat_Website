@@ -45,7 +45,7 @@ function Tickets({ ticket }: any) {
                     <a href={link} target="_blank">Réservez</a>
                 </button>
             </div>
-            <hr className='md:w-4/5 my-3 border border-red-b' />
+            <hr className='w-4/5 my-3 border border-red-b' />
         </div>
     )
 }
