@@ -43,6 +43,15 @@ const config: Config = {
         "red-b": "#fb010193",
         "black": "#000000",
       },
+      animation: {
+        'move-down': 'move-down 0.5s ease-out',
+      },
+      keyframes: {
+        'move-down': {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(100%)' },
+        },
+      },
     },
   },
   plugins: [

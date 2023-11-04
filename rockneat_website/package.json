@@ -21,7 +21,8 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-easy-swipe": "^0.0.23"
+    "react-easy-swipe": "^0.0.23",
+    "react-spring": "^9.7.3"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",

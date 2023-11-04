@@ -25,8 +25,8 @@ function Tickets({ ticket }: any) {
     const { id, image, title, description, date, prix, link } = ticket || {};
     
     return (
-        <div className='flex flex-col w-full items-center'>
-            <div className="flex flex-col md:flex-row items-center md:justify-between md:w-4/5 h-30 my-3">
+        <div className='flex flex-col w-full items-center '>
+            <div className="flex flex-col md:flex-row items-center md:justify-between md:w-4/5 h-30 my-3 ">
                 <div className='flex flex-col md:flex-row items-center'>
                         <Image
                             src={'http://127.0.0.1:8090/api/files/Ticketing/' + id + '/' + image}

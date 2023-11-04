@@ -17,7 +17,7 @@ export default function Nav () {
 
     return (
         <nav className="sticky w-4/5 z-10 overflow-hidden m-auto top-0 border-b border-gray-600 backdrop-blur-sm">
-            <div className="md:hidden">
+            <div className="lg:hidden">
                 <ul className="flex flex-row justify-center p-2 font-medium sm:space-x-8 sm:mt-0">
                     <li>
                         <Link href="/#Nav" className="block px-3">
@@ -76,7 +76,7 @@ export default function Nav () {
                     </li>
                 </ul>
             </div>
-            <div className="justify-center hidden md:flex">
+            <div className="justify-center hidden lg:flex">
                 <ul className="flex flex-row p-2 mt-4 font-medium sm:space-x-8 sm:mt-0">
                     <li>
                         <Link href="/#Nav" id="Home" className={currentRoute === '/' ? activeTextStyle : nonActiveTextStyle}>

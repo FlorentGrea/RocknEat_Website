@@ -27,7 +27,7 @@ export default function RootLayout({
         <Header />
         <Nav />
         <main className='max-w-80 z-10 lg:max-w-60 m-auto'>
-          {children}
+            {children}
         </main>
       </body>
     </html>
