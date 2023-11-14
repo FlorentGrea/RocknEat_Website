@@ -1,43 +1,45 @@
-import CarouselSlider from '../components/client components/Carousel';
+import CarouselSlider from './Carousel';
+import PhotoDisplay from './PhotoDisplay'
+import { PhotoData } from '../types';
 
 async function getPhotos() {
     const res = await fetch(
-        'http://127.0.0.1:8090/api/collections/Photos/records?page=1&perPage=30', 
+        'http://127.0.0.1:8090/api/collections/Photos/records?page=1&perPage=90', 
         { cache: 'no-store' }
     );
     const data = await res.json();
-    return data?.items as string[];
+    return data?.items as PhotoData[];
 }
 
 export default async function PhotosPage() {
-    const items = await getPhotos();
-    const lieux: string[] = [];
-    const concerts: string[] = [];
-    const affiches: string[] = [];
+    const photos = await getPhotos();
+    var lieux: PhotoData = {collectionId: "", id: "", Type:"", img_saved: []};
+    var concerts: PhotoData = {collectionId: "", id: "", Type:"", img_saved: []};
+    var affiches: PhotoData = {collectionId: "", id: "", Type:"", img_saved: []};
 
-    items?.map((item: any) => {
+    photos?.map((item: PhotoData) => {
         if (item.Type == "lieu")
-            lieux.push(item);
+            lieux = item;
         else if (item.Type == "concert")
-            concerts.push(item);
+            concerts = item;
         else if (item.Type == "affiche")
-            affiches.push(item);
+            affiches = item;
     })
 
     return (
         <div className='flex flex-col m-auto'>
-            <h1>Photos</h1>
-            <div>
-                <h1>Le lieu</h1>
-                <CarouselSlider items={lieux} />
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-center py-5">PHOTOS</h1>
+            <div className='mb-4'>
+                <h1 className='text-xl font-bold text-center py-4'>LE LIEU</h1>
+                <PhotoDisplay Photos={lieux} />
             </div>
-            <div>
-                <h1>Les concerts</h1>
-                <CarouselSlider items={concerts} />
+            <div className='mb-4'>
+                <h1 className='text-xl font-bold text-center py-4'>LES CONCERTS</h1>
+                <PhotoDisplay Photos={concerts} />
             </div>
-            <div>
-                <h1>Les affiches</h1>
-                <CarouselSlider items={affiches} />
+            <div className='mb-4'>
+                <h1 className='text-xl font-bold text-center py-4'>LES AFFICHES</h1>
+                <PhotoDisplay Photos={affiches} />
             </div>
         </div>
     )
