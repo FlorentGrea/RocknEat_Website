@@ -62,7 +62,7 @@ export default function Event ({ Event, hour, endHour, date }: EventProps) {
                 alt='oui'
                 className="object-cover w-full h-full z-10"
             />
-            <div className="absolute w-full h-full top-0 bg-black bg-opacity-30 z-20"/>
+            <div className="absolute w-full h-full top-0 bg-black/50 z-20"/>
             <div className="absolute flex flex-col w-[80%] h-[70%] top-[15%] left-[10%] justify-center align-middle text-center z-30">
                 {buttonClicked ?
                     <div className=" w-full break-words">
@@ -101,9 +101,9 @@ export default function Event ({ Event, hour, endHour, date }: EventProps) {
                             :
                                 <div className="w-40 h-5 m-auto pb-1"></div>
                             }
-                            <div className="text-2xl font-extrabold">{date}</div>
-                            <div className="text-lg font-extrabold">{hour + ' - ' + endHour}</div>
-                            <h1 className="text-base font-bold">{Event.title.toUpperCase()}</h1>
+                            <div className="text-sm font-bold">{date}</div>
+                            <div className="text-xs font-bold">{hour + ' - ' + endHour}</div>
+                            <h1 className="text-base font-extrabold">{Event.title.toUpperCase()}</h1>
                         </div>
                         <button onClick={handleClick} className="m-auto">
                             <svg 

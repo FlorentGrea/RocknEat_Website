@@ -43,7 +43,7 @@ export default async function InfosPage() {
             <h1 className="text-2xl sm:text-4xl font-extrabold text-center py-5">INFOS</h1>
             <div className='flex flex-col p-2 w-full bg-black/70 text-center mb-2'>
                 <h3 className='font-semibold'>Horaires</h3>
-                <p>Le Rock n&apos; Eat est ouvert les soirs suivant &eacute;v&eacute;nement de 16h00 a 4h00</p>
+                <p>Le Rock n&apos; Eat est ouvert les soirs suivant &eacute;v&eacute;nement de 16h00 à 4h00</p>
                     <button className='text-center m-auto bg-gray-800 text-white font-semibold py-1 mt-2 pr-4 pl-3 border rounded border-transparent'>
                         <Link href="/Programmation">
                             Programmation

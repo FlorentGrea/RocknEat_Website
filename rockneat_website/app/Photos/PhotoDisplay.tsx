@@ -21,7 +21,7 @@ export default function PhotoDisplay ({ Photos }: PhotoDisplayProps) {
 
     return (
         <div className='flex flex-wrap justify-evenly'>
-            <div className='columns-1 md:columns-2 lg:columns-3 w-full'>
+            <div className='columns-1 md:columns-2 lg:columns-3 gap-1 w-full'>
                 {Photos?.img_saved?.map((photo: string) => {
 
                     return (

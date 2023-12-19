@@ -1,16 +1,4 @@
-import { EventsData } from './types';
-
-async function getEvents() {
-  const res = await fetch(
-      'http://127.0.0.1:8090/api/collections/Events/records?page=1&perPage=30', 
-      { cache: 'no-store' }
-  );
-  const data = await res.json();
-  return data?.items as EventsData[];
-}
-
 export default async function HomePage() {
-  const db_events = await getEvents();
 
   return (
       <div className='flex flex-col text-center text-xl'>
