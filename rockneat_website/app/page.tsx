@@ -1,5 +1,8 @@
-export default async function HomePage() {
+import { redirect } from 'next/navigation';
 
+export default async function HomePage() {
+  redirect('/Programmation');
+  /*
   return (
       <div className='flex flex-col text-center text-xl'>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-center py-5">L'ADRESSE ROCK & METAL À LYON</h1>
@@ -16,4 +19,5 @@ export default async function HomePage() {
         </div>
       </div>
   );
+  */
 }

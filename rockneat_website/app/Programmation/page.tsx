@@ -7,7 +7,6 @@ async function getEvents() {
     const records = await pb.collection('Events').getFullList({
         sort: '-created',
     });
-    console.log(records)
     return records as EventsData[];
 }
 
