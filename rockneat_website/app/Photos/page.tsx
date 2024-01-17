@@ -1,21 +1,20 @@
-import CarouselSlider from './Carousel';
 import PhotoDisplay from './PhotoDisplay'
 import { PhotoData } from '../types';
+import PocketBase from 'pocketbase';
 
 async function getPhotos() {
-    const res = await fetch(
-        'http://127.0.0.1:8090/api/collections/Photos/records?page=1&perPage=90', 
-        { cache: 'no-store' }
-    );
-    const data = await res.json();
-    return data?.items as PhotoData[];
+    const pb = new PocketBase(process.env.DB_ADDR);
+    const records = await pb.collection('Photos').getFullList({
+        sort: '-created'
+    });
+    return records as PhotoData[]
 }
 
 export default async function PhotosPage() {
     const photos = await getPhotos();
-    var lieux: PhotoData = {collectionId: "", id: "", Type:"", img_saved: []};
-    var concerts: PhotoData = {collectionId: "", id: "", Type:"", img_saved: []};
-    var affiches: PhotoData = {collectionId: "", id: "", Type:"", img_saved: []};
+    var lieux: PhotoData = {collectionId: "", id: "", Type:"", img_saved: [], active:false, collectionName:"", created:"", updated:""};
+    var concerts: PhotoData = {collectionId: "", id: "", Type:"", img_saved: [], active:false, collectionName:"", created:"", updated:""};
+    var affiches: PhotoData = {collectionId: "", id: "", Type:"", img_saved: [], active:false, collectionName:"", created:"", updated:""};
 
     photos?.map((item: PhotoData) => {
         if (item.Type == "lieu")

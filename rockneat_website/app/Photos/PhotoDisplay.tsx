@@ -27,7 +27,7 @@ export default function PhotoDisplay ({ Photos }: PhotoDisplayProps) {
                     return (
                         <div key={photo} className="w-full mb-2 md:max-h-96 overflow-hidden bg-black/70 p-1">
                             <Image
-                                src={'http://127.0.0.1:8090/api/files/'+ Photos.collectionId + '/' + Photos.id + '/' + photo}
+                                src={'https://rockneatdb.pockethost.io/api/files/'+ Photos.collectionId + '/' + Photos.id + '/' + photo}
                                 width={1500}
                                 height={1500}
                                 alt={Photos.Type}

@@ -54,7 +54,7 @@ export default function Event ({ Event, hour, endHour, date }: EventProps) {
             <Image
                 src={
                     Event.image ?
-                    'http://127.0.0.1:8090/api/files/Events/' + Event.id + '/' + Event.image
+                    'https://rockneatdb.pockethost.io/api/files/' + Event.collectionId + '/' + Event.id + '/' + Event.image
                     : '/placeholder.png'
                 }
                 width={1500}

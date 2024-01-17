@@ -1,4 +1,5 @@
 import { MenuData } from "../types";
+import PocketBase from 'pocketbase';
 
 interface CarteProps {
     carte: MenuData
@@ -6,27 +7,24 @@ interface CarteProps {
 
 function Carte({ carte }: CarteProps) {
     return (
-            <div className="flex flex-col mb-3">
-                <div className="flex flex-row w-64">
-                    {
-                        carte.Vege &&
-                            <p className="mr-1 text-sm leading-6 text-green-500">{carte.Vege ? "VÉGÉ • " : ""}</p>
-                    }
-                    <p className="font-bold flex-grow">{carte.Titre}</p>
-                    <p>{carte.Prix} €</p>
-                </div>
-                <p className="text-sm w-full">{carte.Description}</p>
+        <div className="flex flex-col mb-3">
+            <div className="flex flex-row w-64">
+                {
+                    carte.Vege &&
+                        <p className="mr-1 text-sm leading-6 text-green-500">{carte.Vege ? "VÉGÉ • " : ""}</p>
+                }
+                <p className="font-bold flex-grow">{carte.Titre}</p>
+                <p>{carte.Prix} €</p>
             </div>
+            <p className="text-sm w-full">{carte.Description}</p>
+        </div>
     )
 }
 
 async function getMenu() {
-    const res = await fetch(
-        'http://127.0.0.1:8090/api/collections/Carte/records?page=1&perPage=60', 
-        { cache: 'no-store' }
-    );
-    const data = await res.json();
-    return data?.items as MenuData[];
+    const pb = new PocketBase(process.env.DB_ADDR);
+    const records = await pb.collection('Carte').getFullList();
+    return records as MenuData[]
 }
 
 export default async function CartePage() {

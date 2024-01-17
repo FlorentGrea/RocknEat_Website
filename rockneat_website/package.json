@@ -19,6 +19,7 @@
     "flowbite-react": "^0.6.4",
     "moment": "^2.29.4",
     "next": "latest",
+    "pocketbase": "^0.20.3",
     "react": "latest",
     "react-dom": "latest",
     "react-easy-swipe": "^0.0.23",

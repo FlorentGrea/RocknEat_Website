@@ -4,7 +4,11 @@ export interface MenuData {
     Titre: string
     Description: string
     Prix: number
-    Vege: Boolean
+    Vege: boolean
+    collectionId: string
+    collectionName: string
+    created: string
+    updated: string
 }
 
 export interface EventsData {
@@ -14,9 +18,12 @@ export interface EventsData {
     title: string
     description: string
     link: string
-    Prix: number
     status: string
     image: string
+    collectionId: string
+    collectionName: string 
+    created: string
+    updated: string
 }
 
 export interface PhotoData {
@@ -24,4 +31,8 @@ export interface PhotoData {
     id: string
     Type: string
     img_saved: string[]
+    active: boolean
+    collectionName: string
+    created: string
+    updated: string
 }

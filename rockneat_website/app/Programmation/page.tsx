@@ -1,13 +1,14 @@
 import EventsList from "./EventsList";
 import { EventsData } from '../types';
+import PocketBase from 'pocketbase';
 
 async function getEvents() {
-  const res = await fetch(
-      'http://127.0.0.1:8090/api/collections/Events/records?page=1&perPage=30', 
-      { cache: 'no-store' }
-  );
-  const data = await res.json();
-  return data?.items as EventsData[];
+    const pb = new PocketBase(process.env.DB_ADDR);
+    const records = await pb.collection('Events').getFullList({
+        sort: '-created',
+    });
+    console.log(records)
+    return records as EventsData[];
 }
 
 export default async function Programmation() {
