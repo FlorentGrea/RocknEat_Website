@@ -1,14 +1,17 @@
-export interface MenuData {
-    id: string
-    Type: string
+export interface ArticleData {
     Titre: string
     Description: string
     Prix: number
     Vege: boolean
-    collectionId: string
-    collectionName: string
-    created: string
-    updated: string
+}
+
+export interface CarteData {
+    Type: string
+    Description: string
+    ordre: number
+    pos_y: number
+    pos_x: number
+    articles: ArticleData[]
 }
 
 export interface EventsData {
@@ -30,7 +33,8 @@ export interface PhotoData {
     collectionId : string
     id: string
     Type: string
-    img_saved: string[]
+    ordre: number
+    Image: string
     active: boolean
     collectionName: string
     created: string

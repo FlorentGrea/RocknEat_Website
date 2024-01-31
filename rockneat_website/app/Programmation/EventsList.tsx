@@ -17,10 +17,6 @@ export default function EventsList ({ db_events }: EventsProps) {
         year: 'numeric' as 'numeric',
     })
 
-    db_events.sort((event1: EventsData, event2: EventsData) => {
-        return (new Date(event1.date).setHours(0, 0, 0, 0) - new Date(event2.date).setHours(0, 0, 0, 0));
-    })
-
     return (
         <div className="flex flex-col items-center">
             <div className="flex flex-wrap w-full">

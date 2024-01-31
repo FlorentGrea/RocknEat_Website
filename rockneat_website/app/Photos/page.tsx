@@ -1,30 +1,32 @@
 import PhotoDisplay from './PhotoDisplay'
 import { PhotoData } from '../types';
-import PocketBase from 'pocketbase';
-
-async function getPhotos() {
-    const pb = new PocketBase(process.env.DB_ADDR);
-    const records = await pb.collection('Photos').getFullList({
-        sort: '-created'
-    });
-    return records as PhotoData[]
-}
+import { getSession } from "@auth0/nextjs-auth0";
+import PhotosAdmin from './PhotosAdmin';
 
 export default async function PhotosPage() {
-    const photos = await getPhotos();
-    var lieux: PhotoData = {collectionId: "", id: "", Type:"", img_saved: [], active:false, collectionName:"", created:"", updated:""};
-    var concerts: PhotoData = {collectionId: "", id: "", Type:"", img_saved: [], active:false, collectionName:"", created:"", updated:""};
-    var affiches: PhotoData = {collectionId: "", id: "", Type:"", img_saved: [], active:false, collectionName:"", created:"", updated:""};
+    const session = await getSession();
+    const user = session?.user;
+    const response = await fetch('http://localhost:3000/api/Photos', { cache: 'no-store' })
+    const photos: PhotoData[] = await response.json()
+    var lieux: PhotoData[] = []
+    var concerts: PhotoData[] = []
+    var affiches: PhotoData[] = []
 
     photos?.map((item: PhotoData) => {
         if (item.Type == "lieu")
-            lieux = item;
+            lieux.push(item)
         else if (item.Type == "concert")
-            concerts = item;
+            concerts.push(item)
         else if (item.Type == "affiche")
-            affiches = item;
+            affiches.push(item)
     })
 
+    lieux.sort((a: any, b: any) =>  a.ordre - b.ordre);
+    concerts.sort((a: any, b: any) =>  a.ordre - b.ordre);
+    affiches.sort((a: any, b: any) =>  a.ordre - b.ordre);
+
+    if (user)
+        return <PhotosAdmin /> 
     return (
         <div className='flex flex-col m-auto'>
             <h1 className="text-2xl sm:text-4xl font-extrabold text-center py-5">PHOTOS</h1>

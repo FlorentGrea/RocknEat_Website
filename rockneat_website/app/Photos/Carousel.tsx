@@ -17,7 +17,7 @@ export default function CarouselSlider ({ photos }: CarouselSliderProps) {
               return (
                 <div key={photo.id} className="h-98 justify-center">
                   <Image
-                      src={'http://127.0.0.1:8090/api/files/Photos/' + photo.id + '/' + photo.img_saved}
+                      src={'http://127.0.0.1:8090/api/files/Photos/' + photo.id + '/' + photo.Image}
                       width={1500}
                       height={1500}
                       alt={photo.Type}

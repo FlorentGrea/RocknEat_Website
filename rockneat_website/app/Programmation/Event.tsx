@@ -44,7 +44,7 @@ interface EventProps {
 
 export default function Event ({ Event, hour, endHour, date }: EventProps) {
     const [buttonClicked, setButtonClicked] = useState(false);
-
+    
     const handleClick = () => {
         setButtonClicked(!buttonClicked);
     };
@@ -54,7 +54,7 @@ export default function Event ({ Event, hour, endHour, date }: EventProps) {
             <Image
                 src={
                     Event.image ?
-                    'https://rockneatdb.pockethost.io/api/files/' + Event.collectionId + '/' + Event.id + '/' + Event.image
+                    'https://rockneatdb.pockethost.io/' + 'api/files/' + Event.collectionId + '/' + Event.id + '/' + Event.image
                     : '/placeholder.png'
                 }
                 width={1500}

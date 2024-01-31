@@ -3,8 +3,10 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from 'next/navigation'
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 export default function Nav () {
+    const { user, error, isLoading } = useUser();
     const currentRoute = usePathname()
 
     const navTextStyle = 'block px-3 hover:text-red '
@@ -18,7 +20,7 @@ export default function Nav () {
     return (
         <nav className="sticky w-[90%] lg:w-[60%] z-50 overflow-hidden m-auto top-0 backdrop-blur-sm">
             <div className="md:hidden">
-                <ul className="flex flex-row justify-center p-2 font-medium sm:space-x-8 sm:mt-0">
+                <ul className="flex flex-row justify-center p-2 font-medium space-x-2 sm:space-x-8 sm:mt-0">
                     <li>
                         <Link href="/Programmation" className="block px-3">
                             <Image
@@ -63,6 +65,19 @@ export default function Nav () {
                             />
                         </Link>
                     </li>
+                    {user && (
+                    <li>    
+                        <a href="/api/auth/logout" className="block px-3">
+                            <Image
+                                src="/logout.svg"
+                                width={25}
+                                height={25}
+                                alt="Administration"
+                                className={nonActiveIconStyle}
+                            />
+                        </a>
+                    </li>
+                    )}
                 </ul>
             </div>
             <div className="justify-center hidden md:flex">
@@ -87,6 +102,13 @@ export default function Nav () {
                             Infos & Booking
                         </Link>
                     </li>
+                    {user && (
+                    <li>
+                        <a href="/api/auth/logout" className={nonActiveTextStyle}>
+                            Déconnection
+                        </a>
+                    </li>
+                    )}
                 </ul>
             </div>
             <hr className='w-full sm:w-4/5 m-auto border border-red-b' />

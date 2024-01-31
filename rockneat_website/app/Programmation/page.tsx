@@ -1,20 +1,20 @@
 import EventsList from "./EventsList";
 import { EventsData } from '../types';
 import PocketBase from 'pocketbase';
-
-async function getEvents() {
-    const pb = new PocketBase(process.env.DB_ADDR);
-    const records = await pb.collection('Events').getFullList({
-        sort: '-created',
-    });
-    return records as EventsData[];
-}
+import { getSession } from "@auth0/nextjs-auth0";
+import ProgrammationAdmin from "./ProgrammationAdmin";
 
 export default async function Programmation() {
-    const db_events = await getEvents();
+    const response = await fetch('http://localhost:3000/api/Programmation', { cache: 'no-store' })
+    const db_events: EventsData[] = await response.json()
+    const session = await getSession();
+    const user = session?.user;
   
     return (
         <div>
+            { user && (
+                <ProgrammationAdmin db_events={db_events} />
+            )}
             <h1 className="text-2xl sm:text-4xl font-extrabold text-center py-5">PROGRAMMATION</h1>
             <EventsList db_events={db_events}/>
         </div>

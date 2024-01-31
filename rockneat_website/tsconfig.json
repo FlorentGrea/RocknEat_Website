@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "downlevelIteration": true, 
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -22,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/Infos/googleMapsLoader.jsx", "app/components/client components/Carousel.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/Infos/googleMapsLoader.jsx", "app/components/client components/Carousel.jsx", "app/api/Infos/route.js", "app/Carte/test.jsx"],
   "exclude": ["node_modules"]
 }
