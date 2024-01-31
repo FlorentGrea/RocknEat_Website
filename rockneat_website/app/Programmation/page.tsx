@@ -5,7 +5,7 @@ import { getSession } from "@auth0/nextjs-auth0";
 import ProgrammationAdmin from "./ProgrammationAdmin";
 
 export default async function Programmation() {
-    const response = await fetch('http://localhost:3000/api/Programmation', { cache: 'no-store' })
+    const response = await fetch(process.env.API_ACCESS + 'api/Programmation', { cache: 'no-store' })
     const db_events: EventsData[] = await response.json()
     const session = await getSession();
     const user = session?.user;

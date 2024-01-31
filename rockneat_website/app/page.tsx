@@ -2,7 +2,7 @@ import { getSession } from '@auth0/nextjs-auth0';
 import AccueilAdmin from './AccueilAdmin';
 
 export default async function HomePage() {
-  const response = await fetch('http://localhost:3000/api/Accueil', { cache: 'no-store' })
+  const response = await fetch(process.env.API_ACCESS + 'api/Accueil', { cache: 'no-store' })
   const Accueil = await response.json()
   const session = await getSession();
   const user = session?.user;

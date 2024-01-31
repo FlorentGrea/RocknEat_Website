@@ -5,7 +5,7 @@ import AddPhotosAdmin from './AddPhotosAdmin';
 import ModifyPhotoAdmin from './ModifyPhotoAdmin';
 
 export default async function PhotosAdmin() {
-    const response = await fetch('http://localhost:3000/api/Photos', { cache: 'no-store' })
+    const response = await fetch(process.env.API_ACCESS + 'api/Photo', { cache: 'no-store' })
     const photos: PhotoData[] = await response.json()
     var lieux: PhotoData[] = []
     var concerts: PhotoData[] = []

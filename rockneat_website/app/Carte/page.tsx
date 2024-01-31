@@ -25,7 +25,7 @@ export default async function CartePage()
 {
     const session = await getSession();
     const user = session?.user;
-    const response = await fetch('http://localhost:3000/api/Carte', { cache: 'no-store' })
+    const response = await fetch(process.env.API_ACCESS + 'api/Carte', { cache: 'no-store' })
     const Carte = await response.json()
     const Col1: any = []
     const Col2: any = []

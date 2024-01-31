@@ -5,7 +5,7 @@ import InfosAdmin from './InfosAdmin';
 import { getSession } from '@auth0/nextjs-auth0';
 
 export default async function InfosPage() {  
-    const response = await fetch('http://localhost:3000/api/Infos', { cache: 'no-store' })
+    const response = await fetch(process.env.API_ACCESS + 'api/Infos', { cache: 'no-store' })
     const Infos = await response.json()
     const session = await getSession();
     const user = session?.user;
