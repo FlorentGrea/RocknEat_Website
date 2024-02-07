@@ -39,9 +39,9 @@ export default function AddPhotosAdmin({ photosDb }: PhotoDisplayProps) {
             newData.push(data)
             const bytes = await (image as File).arrayBuffer()
             const buffer = Buffer.from(bytes)
-            await fs.writeFile('./public/' + data.type + '/' + data.src, buffer)
+            await fs.writeFile(process.cwd() + '/public/' + data.type + '/' + data.src, buffer)
         }
-        await fs.writeFile('./app/json/photosData.json', JSON.stringify(newData));
+        await fs.writeFile(process.cwd() + '/app/json/photosData.json', JSON.stringify(newData));
         revalidatePath("/Photos")
     }
     

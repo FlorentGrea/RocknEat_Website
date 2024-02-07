@@ -1,13 +1,13 @@
-import { getSession } from '@auth0/nextjs-auth0';
+import ChangeAccueilImageAdmin from './AccueilComponents/ChangeAccueilImageAdmin';
+import ChangeDescriptionAdmin from './AccueilComponents/ChangeDescriptionAdmin';
 import ChangeTitleAdmin from './AccueilComponents/ChangeTitleAdmin';
+import { getSession } from '@auth0/nextjs-auth0';
+import { AccueilData } from './types';
 import { promises as fs } from 'fs';
 import Image from 'next/image';
-import ChangeAccueilImageAdmin from './AccueilComponents/ChangeAccueilImageAdmin';
-import { AccueilData } from './types';
-import ChangeDescriptionAdmin from './AccueilComponents/ChangeDescriptionAdmin';
 
 export default async function HomePage() {
-  const file = await fs.readFile("./app/json/accueilData.json", 'utf8');
+  const file = await fs.readFile(process.cwd() + "/app/json/accueilData.json", 'utf8');
   const Accueil: AccueilData = JSON.parse(file)
   const session = await getSession();
   const user = session?.user;

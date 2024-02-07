@@ -21,27 +21,27 @@ export default function InfosAdmin({ data, htmlName }: InfosAdminProps) {
     const [lng, setLng] = useState(Infos.Map_lng)
     const line: lineType = {
         'Mail': 
-            <button className='text-center bg-gray-800 text-white font-semibold py-1 mt-2 ml-5 px-4 border rounded border-transparent w-fit'>
+            <button className="w-fit text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b ml-5">
                 <a href={"mailto:" + Infos.Mail} target="_blank" className='flex flex-row justify-center'>
                     <Image
                         src="/mail.svg"
                         width={40}
                         height={40}
                         alt="Mail"
-                        className="object-contain h-5 w-5 mr-1 filter-white"
+                        className="object-contain h-5 w-5 mr-1 mt-1 filter-white"
                     />
                     <p>{Infos.Mail}</p>
                 </a>    
             </button>,
         'Facebook':                     
-            <button className='text-center bg-gray-800 text-white font-semibold py-1 mt-2 ml-5 pr-4 pl-3 border rounded border-transparent w-fit'>
+            <button className="w-fit text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b ml-5">
                 <a href={Infos.Facebook} target="_blank" className='flex flex-row justify-center'>
                     <Image
                         src="/fb.svg"
                         width={40}
                         height={40}
                         alt="Mail"
-                        className="object-contain h-5 w-5 mr-1 filter-white"
+                        className="object-contain h-5 w-5 mr-1 mt-1 filter-white"
                     />
                     <p>facebook</p>
                 </a>

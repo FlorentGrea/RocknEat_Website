@@ -41,7 +41,7 @@ export default async function CartePage()
 {
     const session = await getSession();
     const user = session?.user;
-    const file = await fs.readFile("./app/json/carteData.json", 'utf8');
+    const file = await fs.readFile(process.cwd() + "/app/json/carteData.json", 'utf8');
     const Carte = await JSON.parse(file)
     let key = 0
 

@@ -14,7 +14,7 @@ export default function ChangeAccueilImageAdmin({ Accueil, name }: PhotoDisplayP
         'use server'
 
         const newData = Accueil
-        await fs.unlink('./public/Accueil/' + (name == 'Image_Salle_1' ? newData.Image_Salle_1 : newData.Image_Salle_2));
+        await fs.unlink(process.cwd() + '/public/Accueil/' + (name == 'Image_Salle_1' ? newData.Image_Salle_1 : newData.Image_Salle_2));
         const image = formData.get("ImageInput")
         if (name == 'Image_Salle_1')
             newData.Image_Salle_1 = (image as File).name
@@ -22,8 +22,8 @@ export default function ChangeAccueilImageAdmin({ Accueil, name }: PhotoDisplayP
             newData.Image_Salle_2 = (image as File).name
         const bytes = await (image as File).arrayBuffer()
         const buffer = Buffer.from(bytes)
-        await fs.writeFile('./public/Accueil/' + (name == 'Image_Salle_1' ? newData.Image_Salle_1 : newData.Image_Salle_2), buffer)
-        await fs.writeFile('./app/json/accueilData.json', JSON.stringify(newData));
+        await fs.writeFile(process.cwd() + '/public/Accueil/' + (name == 'Image_Salle_1' ? newData.Image_Salle_1 : newData.Image_Salle_2), buffer)
+        await fs.writeFile(process.cwd() + '/app/json/accueilData.json', JSON.stringify(newData));
         revalidatePath("/")
     }
     

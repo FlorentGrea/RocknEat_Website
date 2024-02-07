@@ -7,7 +7,7 @@ import { promises as fs } from 'fs';
 export default async function PhotosPage() {
     const session = await getSession();
     const user = session?.user;
-    const file = await fs.readFile('./app/json/photosData.json', 'utf8');
+    const file = await fs.readFile(process.cwd() + '/app/json/photosData.json', 'utf8');
     const photosDb = await JSON.parse(file)
     var lieux: PhotoData[] = []
     var concerts: PhotoData[] = []

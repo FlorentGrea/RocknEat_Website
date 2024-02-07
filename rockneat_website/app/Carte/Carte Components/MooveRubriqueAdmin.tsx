@@ -22,7 +22,7 @@ export default function MooveRubriqueAdmin({ carte, rubrique }: any) {
             console.log(carte[index], carte[index].ordre)
         }
         console.log('coucou1')
-        await fs.writeFile('./app/json/carteData.json', JSON.stringify(carte))
+        await fs.writeFile(process.cwd() + '/app/json/carteData.json', JSON.stringify(carte))
         revalidatePath("/Carte");
     }
 
@@ -36,7 +36,7 @@ export default function MooveRubriqueAdmin({ carte, rubrique }: any) {
                 carte[index].ordre = rubrique.ordre + 1
         }
         console.log('coucou2')
-        await fs.writeFile('./app/json/carteData.json', JSON.stringify(carte))
+        await fs.writeFile(process.cwd() + '/app/json/carteData.json', JSON.stringify(carte))
         revalidatePath("/Carte");
     }
 

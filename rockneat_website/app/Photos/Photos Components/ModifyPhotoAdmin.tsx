@@ -28,7 +28,7 @@ export default function ModifyPhotoAdmin({ photosDb, displayedPhoto }: OnePhotoP
                     photosDb[index].order = displayedPhoto.order - 1
             }
         }
-        await fs.writeFile('./app/json/photosData.json', JSON.stringify(photosDb))
+        await fs.writeFile(process.cwd() + '/app/json/photosData.json', JSON.stringify(photosDb))
         revalidatePath("/Photos");
     }
 
@@ -43,7 +43,7 @@ export default function ModifyPhotoAdmin({ photosDb, displayedPhoto }: OnePhotoP
                     photosDb[index].order = displayedPhoto.order + 1
             }
         }
-        await fs.writeFile('./app/json/photosData.json', JSON.stringify(photosDb))
+        await fs.writeFile(process.cwd() + '/app/json/photosData.json', JSON.stringify(photosDb))
         revalidatePath("/Photos");
     }
 
@@ -63,8 +63,8 @@ export default function ModifyPhotoAdmin({ photosDb, displayedPhoto }: OnePhotoP
         newData = newData.filter(( element ) => {
             return element !== undefined;
         });
-        await fs.unlink('./public/' + displayedPhoto.type + '/' + displayedPhoto.src);
-        await fs.writeFile('./app/json/photosData.json', JSON.stringify(newData))
+        await fs.unlink(process.cwd() + '/public/' + displayedPhoto.type + '/' + displayedPhoto.src);
+        await fs.writeFile(process.cwd() + '/app/json/photosData.json', JSON.stringify(newData))
         revalidatePath("/Photos");
     }
     

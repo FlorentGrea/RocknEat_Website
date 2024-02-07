@@ -24,14 +24,14 @@ export default async function InfosPage() {
                     { user ? (
                         <InfosAdmin data={Infos} htmlName='Mail' />
                       ):(
-                        <button className='text-center m-auto bg-gray-800 text-white font-semibold py-1 mt-2 px-4 border rounded border-transparent'>
+                        <button className="w-fit text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b">
                             <a href={"mailto:" + Infos.Mail} target="_blank" className='flex flex-row justify-center'>
                                 <Image
                                     src="/mail.svg"
                                     width={40}
                                     height={40}
                                     alt="Mail"
-                                    className="object-contain h-5 w-5 mr-1 filter-white pt-1"
+                                    className="object-contain h-5 w-5 mr-1 mt-1 filter-white pt-1"
                                 />
                                 <p>{Infos.Mail}</p>
                             </a>
@@ -43,14 +43,14 @@ export default async function InfosPage() {
                     { user ? (
                         <InfosAdmin data={Infos} htmlName='Facebook' />
                       ):(
-                        <button className='text-center m-auto bg-gray-800 text-white font-semibold py-1 mt-2 pr-4 pl-3 border rounded border-transparent'>
+                        <button className="w-fit text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b">
                             <a href={Infos.Facebook} target="_blank" className='flex flex-row justify-center'>
                                 <Image
                                     src="/fb.svg"
                                     width={40}
                                     height={40}
                                     alt="Mail"
-                                    className="object-contain h-5 w-5 mr-1 filter-white pt-1"
+                                    className="object-contain h-5 w-5 mr-1 mt-1 filter-white pt-1"
                                 />
                                 <p>facebook</p>
                             </a>
@@ -66,7 +66,7 @@ export default async function InfosPage() {
                   ):(
                     <p>{Infos.Horaires}</p>
                 )}
-                <button className='text-center m-auto bg-gray-800 text-white font-semibold py-1 mt-2 pr-4 pl-3 border rounded border-transparent'>
+                <button className="m-auto text-center text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b">
                     <Link href="/Programmation">
                         Programmation
                     </Link>

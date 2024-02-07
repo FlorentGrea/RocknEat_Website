@@ -28,7 +28,7 @@ export default function MooveArticleAdmin({ carte, rubrique, article }: any) {
         }
         carte[r_index].articles[a_index_inf].ordre = article.ordre
         carte[r_index].articles[a_index].ordre = article.ordre - 1
-        await fs.writeFile('./app/json/carteData.json', JSON.stringify(carte))
+        await fs.writeFile(process.cwd() + '/app/json/carteData.json', JSON.stringify(carte))
         revalidatePath("/Carte");
     }
 
@@ -49,7 +49,7 @@ export default function MooveArticleAdmin({ carte, rubrique, article }: any) {
         }
         carte[r_index].articles[a_index].ordre = article.ordre + 1
         carte[r_index].articles[a_index_sup].ordre = article.ordre
-        await fs.writeFile('./app/json/carteData.json', JSON.stringify(carte))
+        await fs.writeFile(process.cwd() + '/app/json/carteData.json', JSON.stringify(carte))
         revalidatePath("/Carte");
     }
 
