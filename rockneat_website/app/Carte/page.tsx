@@ -1,22 +1,38 @@
 import { getSession } from "@auth0/nextjs-auth0";
-import CarteAdmin from "./CarteAdmin";
-import RubriqueAdmin from "./RubriqueAdmin";
+import { promises as fs } from "fs";
+import CreateArticleAdmin from "./Carte Components/CreateArticleAdmin";
+import CreateRubriqueAdmin from "./Carte Components/CreateRubriqueAdmin";
+import ModifyRubriqueAdmin from "./Carte Components/ModifyRubriqueAdmin";
+import MooveRubriqueAdmin from "./Carte Components/MooveRubriqueAdmin";
+import ModifyArticleAdmin from "./Carte Components/ModifyArticleAdmin";
+import MooveArticleAdmin from "./Carte Components/MooveArticleAdmin";
 
-async function Article(article: any) {
-    article = article.article
+async function Article({ carte, rubrique, article }: any) {
     const session = await getSession();
     const user = session?.user;
 
     return (
-        <div className={ article.Description ? "flex flex-col mb-3" : "flex flex-col"}>
-            <div className="flex flex-row w-64">
+        <div className={"flex flex-col " + (article.Description && "mb-3 ")}>
+            <div className="flex flex-row">
                 { article.Vege &&
-                    <p className="mr-1 text-sm leading-6 text-green-500">{article.Vege ? "VÉGÉ • " : ""}</p>
+                    <p className="mr-1 text-sm leading-6 text-green-500" id={"modify" + 'R' + rubrique.ordre + '1A' + article.ordre}>
+                        {article.Vege ? "VÉGÉ • " : ""}
+                    </p>
                 }
-                <p className="font-bold flex-grow">{article.Titre}</p>
-                { article.Prix ? <p>{article.Prix + ' €'}</p> : [] }
+                <p className="font-bold flex-grow" id={"modify" + 'R' + rubrique.ordre + '2A' + article.ordre}>{article.Titre}</p>
+                { article.Prix ?
+                    <p id={"modify" + 'R' + rubrique.ordre + '3A' + article.ordre}>
+                        {article.Prix + ' €'}
+                    </p> : []   
+                }
+                { user && <ModifyArticleAdmin carte={carte} rubrique={rubrique} article={article} />}
+                { user && <MooveArticleAdmin carte={carte} rubrique={rubrique} article={article} />}
             </div>
-            { article.Description ? <p className="text-sm w-full">{article.Description}</p> : []}
+            { article.Description && 
+                <p className="text-sm w-full" id={"modify" + 'R' + rubrique.ordre + '4A' + article.ordre}>
+                    {article.Description}
+                </p> 
+            }
         </div>
     )
 }
@@ -25,10 +41,8 @@ export default async function CartePage()
 {
     const session = await getSession();
     const user = session?.user;
-    const response = await fetch(process.env.API_ACCESS + 'api/Carte', { cache: 'no-store' })
-    const Carte = await response.json()
-    const Col1: any = []
-    const Col2: any = []
+    const file = await fs.readFile("./app/json/carteData.json", 'utf8');
+    const Carte = await JSON.parse(file)
     let key = 0
 
     Carte.sort((a: any, b: any) =>  a.ordre - b.ordre);
@@ -37,65 +51,27 @@ export default async function CartePage()
         Carte[index].articles.sort((a: any, b: any) => a.ordre - b.ordre)
     })
 
-    Carte.map((rubrique: any) => {
-        if (rubrique.ordre % 2 == 0)
-            Col1.push(rubrique)
-        else
-            Col2.push(rubrique)
-    })
-    
     return (
         <div className='flex flex-col m-auto w-full'>
-            { user &&
-                <CarteAdmin carte={Carte} />
-            }
+            { user && <CreateRubriqueAdmin Carte={Carte} />}
             <h1 className="text-2xl sm:text-4xl font-extrabold text-center py-5">CARTE</h1>
-            <div className="flex flex-col sm:hidden justify-between w-full">
+            <div className="columns-1 md:columns-2 break-inside-auto gap-2 w-full">
                 { Carte.map((rubrique: any) => {
-                    if (user)
-                        return (<RubriqueAdmin key={key++} carte={Carte} rubrique={rubrique} />)
                     return (
-                        <div key={key++} className="w-full bg-black/70 p-3 mb-2">
-                            <h1 className="text-xl font-bold mb-2">{rubrique.type}</h1>
-                            <p className="text-red whitespace-pre-line">{rubrique.description}</p>
+                        <div key={key++} className="inline-block w-full bg-black/70 p-3 mb-2">
+                            <div className="flex flex-row">
+                                <h1 className="text-xl font-bold mb-2 mr-1" id={"modify" + '1R' + rubrique.ordre}>{rubrique.type}</h1>
+                                { user && <ModifyRubriqueAdmin carte={Carte} rubrique={rubrique} /> }
+                                { user && <MooveRubriqueAdmin carte={Carte} rubrique={rubrique} />}
+                            </div>
+                            <p className="text-red whitespace-pre-line" id={"modify" + '2R' + rubrique.ordre}>{rubrique.description}</p>
                             { rubrique.articles.map((article: any) => {
-                                return <Article key={key++} article={article} />
+                                return <Article key={key++} carte={Carte} rubrique={rubrique} article={article} />
                             })}
+                            { user && <CreateArticleAdmin carte={Carte} rubrique={rubrique} />}
                         </div>
                     )
                 })}
-            </div>
-            <div className="sm:flex flex-row hidden justify-between w-full">
-                <div className="w-[49%]">
-                    { Col1.map((rubrique: any) => {
-                        if (user)
-                            return (<RubriqueAdmin key={key++} carte={Carte} rubrique={rubrique} />)
-                        return (
-                            <div key={key++} className="w-full bg-black/70 p-3 mb-4">
-                                <h1 className="text-xl font-bold mb-2">{rubrique.type}</h1>
-                                <p className="text-red">{rubrique.description}</p>
-                                { rubrique.articles.map((article: any) => {
-                                    return <Article key={key++} article={article} />
-                                })}
-                            </div>
-                        )
-                    })}
-                </div>
-                <div className="w-[49%]">
-                    { Col2.map((rubrique: any) => {
-                        if (user)
-                            return (<RubriqueAdmin key={key++} carte={Carte} rubrique={rubrique} />)
-                        return (
-                            <div key={key++} className="w-full bg-black/70 p-3 mb-4">
-                                <h1 className="text-xl font-bold mb-2">{rubrique.type}</h1>
-                                <p className="text-red">{rubrique.description}</p>
-                                { rubrique.articles.map((article: any) => {
-                                    return <Article key={key++} article={article} />
-                                })}
-                            </div>
-                        )
-                    })}
-                </div>
             </div>
         </div>
     )

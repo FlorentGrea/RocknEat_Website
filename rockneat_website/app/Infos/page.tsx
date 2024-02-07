@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import GoogleMapView from './GoogleMapView';
-import InfosAdmin from './InfosAdmin';
+import GoogleMapView from './Infos Components/GoogleMapView';
+import InfosAdmin from './Infos Components/InfosAdmin';
 import { getSession } from '@auth0/nextjs-auth0';
 
 export default async function InfosPage() {  

@@ -1,8 +1,8 @@
-import EventsList from "./EventsList";
+import EventsList from "./Programmation Components/EventsList";
 import { EventsData } from '../types';
 import PocketBase from 'pocketbase';
 import { getSession } from "@auth0/nextjs-auth0";
-import ProgrammationAdmin from "./ProgrammationAdmin";
+import ProgrammationAdmin from "./Programmation Components/ProgrammationAdmin";
 
 export default async function Programmation() {
     const response = await fetch(process.env.API_ACCESS + 'api/Programmation', { cache: 'no-store' })

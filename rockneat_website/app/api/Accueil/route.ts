@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@auth0/nextjs-auth0';
 
 export async function GET() {
-    const file = await fs.readFile(process.env.DB_ACCUEIL!, 'utf8');
+    const file = await fs.readFile("./app/json/accueilData.json", 'utf8');
     const data = JSON.parse(file)
 
     return NextResponse.json(data);
@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     if (user) {
         const data = await req.json()
         const updatedData = JSON.stringify(data);
-        await fs.writeFile(process.env.DB_ACCUEIL!, updatedData);
+        await fs.writeFile("./app/json/accueilData.json", updatedData);
         return NextResponse.json({ message: 'Data changed' });
     }
     return (

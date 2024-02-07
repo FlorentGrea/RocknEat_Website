@@ -30,13 +30,18 @@ export interface EventsData {
 }
 
 export interface PhotoData {
-    collectionId : string
-    id: string
-    Type: string
-    ordre: number
-    Image: string
-    active: boolean
-    collectionName: string
-    created: string
-    updated: string
+    type: string
+    order: number
+    src: string
+}
+
+export interface AccueilData {
+    Slogan: string
+    Description: string
+    Nom_Salle_1: string
+    Image_Salle_1: string
+    Description_Salle_1: string
+    Nom_Salle_2: string
+    Image_Salle_2: string
+    Description_Salle_2: string
 }
