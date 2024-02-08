@@ -27,7 +27,7 @@ export default async function InfosPage() {
                     { user ? (
                         <InfosAdmin data={Infos} htmlName='Mail' />
                       ):(
-                        <button className="w-fit text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b">
+                        <button className="w-fit text-lg m-auto bg-black px-3 py-1 my-1 shadow shadow-red-b">
                             <a href={"mailto:" + Infos.Mail} target="_blank" className='flex flex-row justify-center'>
                                 <Image
                                     src="/mail.svg"
@@ -46,7 +46,7 @@ export default async function InfosPage() {
                     { user ? (
                         <InfosAdmin data={Infos} htmlName='Facebook' />
                       ):(
-                        <button className="w-fit text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b">
+                        <button className="w-fit text-lg m-auto bg-black px-3 py-1 my-1 shadow shadow-red-b">
                             <a href={Infos.Facebook} target="_blank" className='flex flex-row justify-center'>
                                 <Image
                                     src="/fb.svg"
