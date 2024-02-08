@@ -1,9 +1,11 @@
 import { promises as fs } from "fs";
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@auth0/nextjs-auth0';
+import path from "path";
 
 export async function GET() {
-    const file = await fs.readFile(process.cwd() + "/app/json/carteData.json", 'utf8');
+    const actual_path = path.join(process.cwd(), 'json')
+    const file = await fs.readFile(actual_path + "/carteData.json", 'utf8');
     const data = await JSON.parse(file)
     return NextResponse.json(data);
 }
@@ -11,10 +13,12 @@ export async function GET() {
 export async function POST(req: NextRequest) {
     const session = await getSession();
     const user = session?.user;
+
     if (user) {
         const data = await req.json()
         const updatedData = JSON.stringify(data);
-        await fs.writeFile(process.cwd() + "/app/json/carteData.json", updatedData);
+        const actual_path = path.join(process.cwd(), 'json')
+        await fs.writeFile(actual_path + "/carteData.json", updatedData);
         return NextResponse.json({ message: 'Data changed' });
     }
     return (

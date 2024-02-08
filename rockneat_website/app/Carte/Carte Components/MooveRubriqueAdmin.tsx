@@ -1,9 +1,11 @@
-import Image from "next/image";
-import { promises as fs } from "fs";
-import { revalidatePath } from "next/cache";
 import SubmitButtonCarte from "./SubmitButtonCarte";
+import { revalidatePath } from "next/cache";
+import { promises as fs } from "fs";
+import Image from "next/image";
+import path from "path";
 
 export default function MooveRubriqueAdmin({ carte, rubrique }: any) {
+    const actual_path = path.join(process.cwd(), 'json')
     let ordreMax = 0
     
     carte.map((rubrique: any) => {
@@ -21,8 +23,7 @@ export default function MooveRubriqueAdmin({ carte, rubrique }: any) {
                 carte[index].ordre = rubrique.ordre - 1
             console.log(carte[index], carte[index].ordre)
         }
-        console.log('coucou1')
-        await fs.writeFile(process.cwd() + '/app/json/carteData.json', JSON.stringify(carte))
+        await fs.writeFile(actual_path + '/carteData.json', JSON.stringify(carte))
         revalidatePath("/Carte");
     }
 
@@ -35,8 +36,7 @@ export default function MooveRubriqueAdmin({ carte, rubrique }: any) {
             else if (carte[index].ordre == rubrique.ordre) 
                 carte[index].ordre = rubrique.ordre + 1
         }
-        console.log('coucou2')
-        await fs.writeFile(process.cwd() + '/app/json/carteData.json', JSON.stringify(carte))
+        await fs.writeFile(actual_path + '/carteData.json', JSON.stringify(carte))
         revalidatePath("/Carte");
     }
 

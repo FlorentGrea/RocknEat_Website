@@ -139,7 +139,7 @@ export default function ModifyArticleAdmin({ carte, rubrique, article }: any) {
                 </div>
                 <input type="submit" value="Modifier" className="text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b" />
                 <button className="cartePendingButton disabled:animate-pulse text-lg bg-black px-3 py-1 mt-2 mb-5 shadow shadow-red-b" onClick={handleDelete}>
-                    Suprimer l'article
+                    Suprimer l&apos;article
                 </button>
             </form>
             <button onClick={() => {setModifyButton(1)}} className="self-start">

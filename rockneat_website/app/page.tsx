@@ -5,9 +5,11 @@ import { getSession } from '@auth0/nextjs-auth0';
 import { AccueilData } from './types';
 import { promises as fs } from 'fs';
 import Image from 'next/image';
+import path from 'path';
 
 export default async function HomePage() {
-  const file = await fs.readFile(process.cwd() + "/app/json/accueilData.json", 'utf8');
+  const actual_path = path.join(process.cwd(), 'json')
+  const file = await fs.readFile(actual_path + "/accueilData.json", 'utf8');
   const Accueil: AccueilData = JSON.parse(file)
   const session = await getSession();
   const user = session?.user;

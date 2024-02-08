@@ -1,11 +1,12 @@
-import { getSession } from "@auth0/nextjs-auth0";
-import { promises as fs } from "fs";
-import CreateArticleAdmin from "./Carte Components/CreateArticleAdmin";
 import CreateRubriqueAdmin from "./Carte Components/CreateRubriqueAdmin";
 import ModifyRubriqueAdmin from "./Carte Components/ModifyRubriqueAdmin";
+import CreateArticleAdmin from "./Carte Components/CreateArticleAdmin";
 import MooveRubriqueAdmin from "./Carte Components/MooveRubriqueAdmin";
 import ModifyArticleAdmin from "./Carte Components/ModifyArticleAdmin";
 import MooveArticleAdmin from "./Carte Components/MooveArticleAdmin";
+import { getSession } from "@auth0/nextjs-auth0";
+import { promises as fs } from "fs";
+import path from "path";
 
 async function Article({ carte, rubrique, article }: any) {
     const session = await getSession();
@@ -41,7 +42,8 @@ export default async function CartePage()
 {
     const session = await getSession();
     const user = session?.user;
-    const file = await fs.readFile(process.cwd() + "/app/json/carteData.json", 'utf8');
+    const actual_path = path.join(process.cwd(), 'json')
+    const file = await fs.readFile(actual_path + "/carteData.json", 'utf8');
     const Carte = await JSON.parse(file)
     let key = 0
 

@@ -72,7 +72,7 @@ export default function ProgrammationAdmin({ db_events }: EventsProps) {
                                 </select>
                             </div>
                             <button onClick={handleDelete} className='h-fit text-lg bg-black px-3 py-1 md:mt-6 shadow shadow-red-b self-center'>
-                                Suprimer l'événement
+                                Suprimer l&apos;événement
                             </button>
                         </div>
                         <UpdateEventAdmin key={updateKey} event_db={eventArr} />

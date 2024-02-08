@@ -1,8 +1,9 @@
-import Image from "next/image";
-import { PhotoData } from "../../types";
-import { revalidatePath } from "next/cache";
-import { promises as fs } from "fs";
 import SubmitButtonPhoto from "./SubmitButtonPhoto";
+import { revalidatePath } from "next/cache";
+import { PhotoData } from "../../types";
+import { promises as fs } from "fs";
+import Image from "next/image";
+import path from "path";
 
 interface OnePhotoProps {
     photosDb: PhotoData[]
@@ -10,6 +11,7 @@ interface OnePhotoProps {
 }
 
 export default function ModifyPhotoAdmin({ photosDb, displayedPhoto }: OnePhotoProps) {
+    const actual_path = path.join(process.cwd(), 'json')
     let maxOrder = 0;
     
     photosDb.map((photo) => {
@@ -28,7 +30,7 @@ export default function ModifyPhotoAdmin({ photosDb, displayedPhoto }: OnePhotoP
                     photosDb[index].order = displayedPhoto.order - 1
             }
         }
-        await fs.writeFile(process.cwd() + '/app/json/photosData.json', JSON.stringify(photosDb))
+        await fs.writeFile(actual_path + '/photosData.json', JSON.stringify(photosDb))
         revalidatePath("/Photos");
     }
 
@@ -43,7 +45,7 @@ export default function ModifyPhotoAdmin({ photosDb, displayedPhoto }: OnePhotoP
                     photosDb[index].order = displayedPhoto.order + 1
             }
         }
-        await fs.writeFile(process.cwd() + '/app/json/photosData.json', JSON.stringify(photosDb))
+        await fs.writeFile(actual_path + '/photosData.json', JSON.stringify(photosDb))
         revalidatePath("/Photos");
     }
 
@@ -63,8 +65,8 @@ export default function ModifyPhotoAdmin({ photosDb, displayedPhoto }: OnePhotoP
         newData = newData.filter(( element ) => {
             return element !== undefined;
         });
-        await fs.unlink(process.cwd() + '/public/' + displayedPhoto.type + '/' + displayedPhoto.src);
-        await fs.writeFile(process.cwd() + '/app/json/photosData.json', JSON.stringify(newData))
+        await fs.unlink('/' + displayedPhoto.type + '/' + displayedPhoto.src);
+        await fs.writeFile(actual_path + '/photosData.json', JSON.stringify(newData))
         revalidatePath("/Photos");
     }
     

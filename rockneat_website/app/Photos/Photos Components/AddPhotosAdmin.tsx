@@ -2,6 +2,7 @@ import { revalidatePath } from "next/cache";
 import { PhotoData } from "../../types";
 import SubmitButtonPhoto from "./SubmitButtonPhoto";
 import { promises as fs } from "fs";
+import path from "path";
 
 interface PhotoDisplayProps {
     photosDb: PhotoData[]
@@ -39,9 +40,10 @@ export default function AddPhotosAdmin({ photosDb }: PhotoDisplayProps) {
             newData.push(data)
             const bytes = await (image as File).arrayBuffer()
             const buffer = Buffer.from(bytes)
-            await fs.writeFile(process.cwd() + '/public/' + data.type + '/' + data.src, buffer)
+            await fs.writeFile('/' + data.type + '/' + data.src, buffer)
         }
-        await fs.writeFile(process.cwd() + '/app/json/photosData.json', JSON.stringify(newData));
+        const actual_path = path.join(process.cwd(), 'json')
+        await fs.writeFile(actual_path + '/photosData.json', JSON.stringify(newData));
         revalidatePath("/Photos")
     }
     

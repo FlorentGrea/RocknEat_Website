@@ -1,12 +1,15 @@
-import Link from 'next/link';
-import Image from 'next/image';
 import GoogleMapView from './Infos Components/GoogleMapView';
 import InfosAdmin from './Infos Components/InfosAdmin';
 import { getSession } from '@auth0/nextjs-auth0';
+import { promises as fs } from 'fs';
+import Image from 'next/image';
+import Link from 'next/link';
+import path from 'path';
 
 export default async function InfosPage() {  
-    const response = await fetch(process.env.API_ACCESS + 'api/Infos', { cache: 'no-store' })
-    const Infos = await response.json()
+    const actual_path = path.join(process.cwd(), 'json')
+    const file = await fs.readFile(actual_path + "/infosData.json", 'utf8');
+    const Infos = await JSON.parse(file)
     const session = await getSession();
     const user = session?.user;
 

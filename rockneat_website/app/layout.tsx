@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="bg-[url('/bgtest.webp')] bg-fixed bg-cover bg-top">
       <Head>
-        <title>Rock n'Eat Live</title>
+        <title>Rock n&apos;Eat Live</title>
         <meta
           name="Rock n'Eat Live"
           content="Salle de concert rock" 

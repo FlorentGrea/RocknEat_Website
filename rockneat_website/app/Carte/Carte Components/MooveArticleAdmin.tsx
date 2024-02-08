@@ -1,9 +1,11 @@
-import Image from "next/image";
-import { promises as fs } from "fs";
-import { revalidatePath } from "next/cache";
 import SubmitButtonCarte from "./SubmitButtonCarte";
+import { revalidatePath } from "next/cache";
+import { promises as fs } from "fs";
+import Image from "next/image";
+import path from "path";
 
 export default function MooveArticleAdmin({ carte, rubrique, article }: any) {
+    const actual_path = path.join(process.cwd(), 'json')
     let ordreMax = 0
     
     rubrique.articles.map((article: any) => {
@@ -28,7 +30,7 @@ export default function MooveArticleAdmin({ carte, rubrique, article }: any) {
         }
         carte[r_index].articles[a_index_inf].ordre = article.ordre
         carte[r_index].articles[a_index].ordre = article.ordre - 1
-        await fs.writeFile(process.cwd() + '/app/json/carteData.json', JSON.stringify(carte))
+        await fs.writeFile(actual_path + '/carteData.json', JSON.stringify(carte))
         revalidatePath("/Carte");
     }
 
@@ -49,7 +51,7 @@ export default function MooveArticleAdmin({ carte, rubrique, article }: any) {
         }
         carte[r_index].articles[a_index].ordre = article.ordre + 1
         carte[r_index].articles[a_index_sup].ordre = article.ordre
-        await fs.writeFile(process.cwd() + '/app/json/carteData.json', JSON.stringify(carte))
+        await fs.writeFile(actual_path + '/carteData.json', JSON.stringify(carte))
         revalidatePath("/Carte");
     }
 

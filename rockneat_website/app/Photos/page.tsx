@@ -1,13 +1,15 @@
-import PhotoDisplay from './Photos Components/PhotoDisplay'
-import { PhotoData } from '../types';
-import { getSession } from "@auth0/nextjs-auth0";
 import AddPhotosAdmin from './Photos Components/AddPhotosAdmin';
+import PhotoDisplay from './Photos Components/PhotoDisplay'
+import { getSession } from "@auth0/nextjs-auth0";
+import { PhotoData } from '../types';
 import { promises as fs } from 'fs';
+import path from 'path';
 
 export default async function PhotosPage() {
     const session = await getSession();
     const user = session?.user;
-    const file = await fs.readFile(process.cwd() + '/app/json/photosData.json', 'utf8');
+    const actual_path = path.join(process.cwd(), 'json')
+    const file = await fs.readFile(actual_path + '/photosData.json', 'utf8');
     const photosDb = await JSON.parse(file)
     var lieux: PhotoData[] = []
     var concerts: PhotoData[] = []

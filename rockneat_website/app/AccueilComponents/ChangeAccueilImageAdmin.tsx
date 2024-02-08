@@ -2,6 +2,7 @@ import { revalidatePath } from "next/cache";
 import { promises as fs } from "fs";
 import { AccueilData } from "../types";
 import Image from "next/image";
+import path from "path";
 
 interface PhotoDisplayProps {
     Accueil: AccueilData
@@ -14,7 +15,7 @@ export default function ChangeAccueilImageAdmin({ Accueil, name }: PhotoDisplayP
         'use server'
 
         const newData = Accueil
-        await fs.unlink(process.cwd() + '/public/Accueil/' + (name == 'Image_Salle_1' ? newData.Image_Salle_1 : newData.Image_Salle_2));
+        await fs.unlink('/Accueil/' + (name == 'Image_Salle_1' ? newData.Image_Salle_1 : newData.Image_Salle_2));
         const image = formData.get("ImageInput")
         if (name == 'Image_Salle_1')
             newData.Image_Salle_1 = (image as File).name
@@ -22,8 +23,9 @@ export default function ChangeAccueilImageAdmin({ Accueil, name }: PhotoDisplayP
             newData.Image_Salle_2 = (image as File).name
         const bytes = await (image as File).arrayBuffer()
         const buffer = Buffer.from(bytes)
-        await fs.writeFile(process.cwd() + '/public/Accueil/' + (name == 'Image_Salle_1' ? newData.Image_Salle_1 : newData.Image_Salle_2), buffer)
-        await fs.writeFile(process.cwd() + '/app/json/accueilData.json', JSON.stringify(newData));
+        await fs.writeFile('/Accueil/' + (name == 'Image_Salle_1' ? newData.Image_Salle_1 : newData.Image_Salle_2), buffer)
+        const actual_path = path.join(process.cwd(), 'json')
+        await fs.writeFile(actual_path + '/accueilData.json', JSON.stringify(newData));
         revalidatePath("/")
     }
     
