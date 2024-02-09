@@ -1,22 +1,22 @@
 import ChangeAccueilImageAdmin from './AccueilComponents/ChangeAccueilImageAdmin';
 import ChangeDescriptionAdmin from './AccueilComponents/ChangeDescriptionAdmin';
-import ChangeTitleAdmin from './AccueilComponents/ChangeTitleAdmin';
+import ChangeTitleAdmin  from './AccueilComponents/ChangeTitleAdmin';
 import { getSession } from '@auth0/nextjs-auth0';
 import { AccueilData } from './types';
-import { promises as fs } from 'fs';
+import PocketBase from 'pocketbase';
 import Image from 'next/image';
-import path from 'path';
+import { promises as fs } from 'fs';
 
 export default async function HomePage() {
-  const actual_path = path.join(process.cwd(), 'json')
-  const file = await fs.readFile(actual_path + "/accueilData.json", 'utf8');
-  const Accueil: AccueilData = JSON.parse(file)
+  const pb = new PocketBase(process.env.DB_ADDR);
+  const record = await pb.collection('Jsons').getOne('zggxukzkdiujtsf', { cache: 'no-store' })
+  const Accueil: AccueilData = JSON.parse(JSON.stringify(record.json_file))
   const session = await getSession();
   const user = session?.user;
 
   return (
     <div className='flex flex-col text-center text-xl'>
-      <ChangeTitleAdmin 
+      <ChangeTitleAdmin
         user={user}
         data={Accueil} 
         name={'Slogan'} 
@@ -38,7 +38,7 @@ export default async function HomePage() {
           />
           <div className='relative'>
             <Image
-                src={'/accueil/' + Accueil.Image_Salle_1}
+                src={process.env.DB_ADDR + 'api/files/Photos/z8j1g9wd0sd6ion/' + Accueil.Image_Salle_1}
                 width={1500}
                 height={1500}
                 alt={Accueil.Image_Salle_1}
@@ -64,7 +64,7 @@ export default async function HomePage() {
           />
           <div className='relative'>
             <Image
-                src={'/accueil/' + Accueil.Image_Salle_2}
+                src={process.env.DB_ADDR + 'api/files/Photos/7jyubioar8q8n9j/' + Accueil.Image_Salle_2}
                 width={1500}
                 height={1500}
                 alt={Accueil.Image_Salle_2}

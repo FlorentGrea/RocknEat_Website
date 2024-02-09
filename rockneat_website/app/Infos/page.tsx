@@ -1,15 +1,14 @@
 import GoogleMapView from './Infos Components/GoogleMapView';
 import InfosAdmin from './Infos Components/InfosAdmin';
 import { getSession } from '@auth0/nextjs-auth0';
-import { promises as fs } from 'fs';
+import PocketBase from 'pocketbase';
 import Image from 'next/image';
 import Link from 'next/link';
-import path from 'path';
 
 export default async function InfosPage() {  
-    const actual_path = path.join(process.cwd(), 'json')
-    const file = await fs.readFile(actual_path + "/infosData.json", 'utf8');
-    const Infos = await JSON.parse(file)
+    const pb = new PocketBase(process.env.DB_ADDR);
+    const record = await pb.collection('Jsons').getOne('fw6lepz7dvc188d', { cache: 'no-store'})
+    const Infos = JSON.parse(JSON.stringify(record.json_file))
     const session = await getSession();
     const user = session?.user;
 

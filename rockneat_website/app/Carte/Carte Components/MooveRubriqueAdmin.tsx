@@ -1,11 +1,9 @@
 import SubmitButtonCarte from "./SubmitButtonCarte";
 import { revalidatePath } from "next/cache";
-import { promises as fs } from "fs";
+import PocketBase from 'pocketbase';
 import Image from "next/image";
-import path from "path";
 
 export default function MooveRubriqueAdmin({ carte, rubrique }: any) {
-    const actual_path = path.join(process.cwd(), 'json')
     let ordreMax = 0
     
     carte.map((rubrique: any) => {
@@ -16,6 +14,7 @@ export default function MooveRubriqueAdmin({ carte, rubrique }: any) {
     async function mooveUp () {
         'use server'
         
+        const pb = new PocketBase(process.env.DB_ADDR);
         for (let index = 0; carte[index]; index++) {
             if (carte[index].ordre == rubrique.ordre - 1)
                 carte[index].ordre = rubrique.ordre
@@ -23,20 +22,27 @@ export default function MooveRubriqueAdmin({ carte, rubrique }: any) {
                 carte[index].ordre = rubrique.ordre - 1
             console.log(carte[index], carte[index].ordre)
         }
-        await fs.writeFile(actual_path + '/carteData.json', JSON.stringify(carte))
+        const jsonData = {
+            "json_file": JSON.stringify(carte)
+        }
+        await pb.collection('Jsons').update('emip3npy7ntnwse', jsonData);
         revalidatePath("/Carte");
     }
 
     async function mooveDown() {
         'use server'
 
+        const pb = new PocketBase(process.env.DB_ADDR);
         for (let index = 0; carte[index]; index++) {
             if (carte[index].ordre == rubrique.ordre + 1)
                 carte[index].ordre = rubrique.ordre
             else if (carte[index].ordre == rubrique.ordre) 
                 carte[index].ordre = rubrique.ordre + 1
         }
-        await fs.writeFile(actual_path + '/carteData.json', JSON.stringify(carte))
+        const jsonData = {
+            "json_file": JSON.stringify(carte)
+        }
+        await pb.collection('Jsons').update('emip3npy7ntnwse', jsonData);
         revalidatePath("/Carte");
     }
 

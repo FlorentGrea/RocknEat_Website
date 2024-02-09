@@ -5,8 +5,7 @@ import MooveRubriqueAdmin from "./Carte Components/MooveRubriqueAdmin";
 import ModifyArticleAdmin from "./Carte Components/ModifyArticleAdmin";
 import MooveArticleAdmin from "./Carte Components/MooveArticleAdmin";
 import { getSession } from "@auth0/nextjs-auth0";
-import { promises as fs } from "fs";
-import path from "path";
+import PocketBase from 'pocketbase';
 
 async function Article({ carte, rubrique, article }: any) {
     const session = await getSession();
@@ -38,13 +37,12 @@ async function Article({ carte, rubrique, article }: any) {
     )
 }
 
-export default async function CartePage()
-{
+export default async function CartePage() {
+    const pb = new PocketBase(process.env.DB_ADDR);
+    const record = await pb.collection('Jsons').getOne('emip3npy7ntnwse', { cache: 'no-store' })
+    const Carte = JSON.parse(JSON.stringify(record.json_file))
     const session = await getSession();
     const user = session?.user;
-    const actual_path = path.join(process.cwd(), 'json')
-    const file = await fs.readFile(actual_path + "/carteData.json", 'utf8');
-    const Carte = await JSON.parse(file)
     let key = 0
 
     Carte.sort((a: any, b: any) =>  a.ordre - b.ordre);

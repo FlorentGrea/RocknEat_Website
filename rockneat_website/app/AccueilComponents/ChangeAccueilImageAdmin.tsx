@@ -1,8 +1,7 @@
 import { revalidatePath } from "next/cache";
-import { promises as fs } from "fs";
 import { AccueilData } from "../types";
+import PocketBase from 'pocketbase';
 import Image from "next/image";
-import path from "path";
 
 interface PhotoDisplayProps {
     Accueil: AccueilData
@@ -14,18 +13,24 @@ export default function ChangeAccueilImageAdmin({ Accueil, name }: PhotoDisplayP
     async function addPhoto(formData: FormData) {
         'use server'
 
+        const pb = new PocketBase(process.env.DB_ADDR);
+        const id = name == 'Image_Salle_1' ? 'z8j1g9wd0sd6ion' : '7jyubioar8q8n9j'
         const newData = Accueil
-        await fs.unlink('/Accueil/' + (name == 'Image_Salle_1' ? newData.Image_Salle_1 : newData.Image_Salle_2));
         const image = formData.get("ImageInput")
+        const postData = new FormData
+        postData.set('Images', image as File)
+        postData.set('Images_name', (name == 'Image_Salle_1' ? 'Accueil_1' : 'Accueil_2'))
+        await pb.collection('Photos').update(id, {'Images-': [name == 'Image_Salle_1' ? newData.Image_Salle_1 : newData.Image_Salle_2]});
+        const record = await pb.collection('Photos').update(id, postData);
+        const data = await JSON.parse(JSON.stringify(record))
         if (name == 'Image_Salle_1')
-            newData.Image_Salle_1 = (image as File).name
+            newData.Image_Salle_1 = data.Images[0]
         else
-            newData.Image_Salle_2 = (image as File).name
-        const bytes = await (image as File).arrayBuffer()
-        const buffer = Buffer.from(bytes)
-        await fs.writeFile('/Accueil/' + (name == 'Image_Salle_1' ? newData.Image_Salle_1 : newData.Image_Salle_2), buffer)
-        const actual_path = path.join(process.cwd(), 'json')
-        await fs.writeFile(actual_path + '/accueilData.json', JSON.stringify(newData));
+            newData.Image_Salle_2 = data.Images[0]
+        const jsonData = {
+            "json_file": JSON.stringify(newData)
+        }
+        await pb.collection('Jsons').update('zggxukzkdiujtsf', jsonData);
         revalidatePath("/")
     }
     
@@ -33,14 +38,14 @@ export default function ChangeAccueilImageAdmin({ Accueil, name }: PhotoDisplayP
         <div className="absolute bottom-0 w-full">
             <form name="modifyPhoto" action={addPhoto}  className="flex flex-row justify-center">
                 <input
-                    id="Image"
+                    id={name}
                     type="file"
                     name="ImageInput"
                     required
                     accept="image/*"
                     className="p-2 hidden"
                 ></input>
-                <label htmlFor="Image" className="flex flex-row w-fit text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b">
+                <label htmlFor={name} className="flex flex-row w-fit text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b">
                     <Image
                         src="/upload.svg"
                         width={40}

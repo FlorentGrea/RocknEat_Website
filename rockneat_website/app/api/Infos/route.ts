@@ -1,25 +1,27 @@
-import { promises as fs } from "fs";
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@auth0/nextjs-auth0';
-import path from "path";
+import PocketBase from 'pocketbase';
 
 export async function GET() {
-    const actual_path = path.join(process.cwd(), 'json')
-    const file = await fs.readFile(actual_path + "/infosData.json", 'utf8');
-    const data = JSON.parse(file)
+    const pb = new PocketBase(process.env.DB_ADDR);
+    const record = await pb.collection('Jsons').getOne('fw6lepz7dvc188d')
+    const data = JSON.parse(JSON.stringify(record.json_file))
 
     return NextResponse.json(data);
 }
 
 export async function POST(req: NextRequest) {
+    const pb = new PocketBase(process.env.DB_ADDR);
     const session = await getSession();
     const user = session?.user;
+
     if (user) {
-        const data = await req.json()
-        const updatedData = JSON.stringify(data);
-        const actual_path = path.join(process.cwd(), 'json')
-        await fs.writeFile(actual_path + "/infosData.json", updatedData);
-        return NextResponse.json({ message: 'Data changed' });
+        const post_data = {
+            "json_name": 'infosData',
+            "json_file": await req.json()
+        }
+        const record = await pb.collection('Jsons').update('fw6lepz7dvc188d', post_data);
+        return NextResponse.json(record);
     }
     return (
         NextResponse.json({

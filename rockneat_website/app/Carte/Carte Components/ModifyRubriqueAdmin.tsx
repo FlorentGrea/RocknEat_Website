@@ -1,10 +1,12 @@
 'use client'
 
-import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
+import Image from "next/image"
 
 export default function ModifyRubriqueAdmin({ carte, rubrique }: any) {
     const [modifyButton, setModifyButton] = useState(1)
+    const Router = useRouter();
     let new_ordre = rubrique.ordre
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -25,7 +27,11 @@ export default function ModifyRubriqueAdmin({ carte, rubrique }: any) {
         } catch (error) {
             console.log(error)
         } finally {
-            setModifyButton(1)
+            try {
+                Router.refresh()
+            } finally {
+                setModifyButton(1)
+            }
         }
     }
 
@@ -53,7 +59,11 @@ export default function ModifyRubriqueAdmin({ carte, rubrique }: any) {
         } catch (error) {
             console.log(error)
         } finally {
-            setModifyButton(1)
+            try {
+                Router.refresh()
+            } finally {
+                setModifyButton(1)
+            }
         }
     }
     

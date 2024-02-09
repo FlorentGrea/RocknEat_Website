@@ -11,6 +11,14 @@ interface PhotoDisplayProps {
 export default async function PhotoDisplay ({ photosDb, photosList }: PhotoDisplayProps) {
     const session = await getSession();
     const user = session?.user;
+    let id = ''
+    
+    if (photosList[0].type == 'lieu')
+        id = 'q5bfart0si6hlyl'
+    else if (photosList[0].type == 'concert')
+        id = 'j81c25iij9uicny'
+    else if (photosList[0].type == 'affiche')
+        id = 'cc12szu6cisrejt'
 
     return (
         <div className='flex flex-wrap justify-evenly'>
@@ -19,9 +27,9 @@ export default async function PhotoDisplay ({ photosDb, photosList }: PhotoDispl
 
                     return (
                         <div key={photo.order} className="relative break-inside-avoid w-full mb-2 md:max-h-96 bg-black/70 p-1">
-                            { user && <ModifyPhotoAdmin photosDb={photosDb} displayedPhoto={photo} /> }
+                            { user && <ModifyPhotoAdmin photosDb={photosDb} displayedPhoto={photo} id={id} /> }
                             <Image
-                                src={'/'+ photo.type + '/' + photo.src}
+                                src={process.env.DB_ADDR + 'api/files/Photos/' + id + '/' + photo.src}
                                 width={1500}
                                 height={1500}
                                 alt={photo.type}

@@ -1,8 +1,9 @@
 import SubmitButtonCarte from "./SubmitButtonCarte";
 import { revalidatePath } from "next/cache";
-import { promises as fs } from "fs";
+import PocketBase from 'pocketbase';
 import Image from "next/image";
 import path from "path";
+
 
 export default function MooveArticleAdmin({ carte, rubrique, article }: any) {
     const actual_path = path.join(process.cwd(), 'json')
@@ -16,6 +17,7 @@ export default function MooveArticleAdmin({ carte, rubrique, article }: any) {
     async function mooveUp () {
         'use server'
         
+        const pb = new PocketBase(process.env.DB_ADDR);
         let r_index = 0
         let a_index_inf = 0
         let a_index = 0
@@ -29,14 +31,18 @@ export default function MooveArticleAdmin({ carte, rubrique, article }: any) {
                 a_index = index
         }
         carte[r_index].articles[a_index_inf].ordre = article.ordre
-        carte[r_index].articles[a_index].ordre = article.ordre - 1
-        await fs.writeFile(actual_path + '/carteData.json', JSON.stringify(carte))
+        carte[r_index].articles[a_index].ordre = article.ordre - 1        
+        const jsonData = {
+            "json_file": JSON.stringify(carte)
+        }
+        await pb.collection('Jsons').update('emip3npy7ntnwse', jsonData);
         revalidatePath("/Carte");
     }
 
     async function mooveDown() {
         'use server'
         
+        const pb = new PocketBase(process.env.DB_ADDR);
         let r_index = 0
         let a_index = 0
         let a_index_sup = 0
@@ -50,8 +56,11 @@ export default function MooveArticleAdmin({ carte, rubrique, article }: any) {
                 a_index_sup = index
         }
         carte[r_index].articles[a_index].ordre = article.ordre + 1
-        carte[r_index].articles[a_index_sup].ordre = article.ordre
-        await fs.writeFile(actual_path + '/carteData.json', JSON.stringify(carte))
+        carte[r_index].articles[a_index_sup].ordre = article.ordre        
+        const jsonData = {
+            "json_file": JSON.stringify(carte)
+        }
+        await pb.collection('Jsons').update('emip3npy7ntnwse', jsonData);
         revalidatePath("/Carte");
     }
 

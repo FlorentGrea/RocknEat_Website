@@ -1,8 +1,9 @@
 'use client'
 
-import Image from "next/image"
-import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { AccueilData } from "../types"
+import { useState } from "react"
+import Image from "next/image"
 
 interface ChangeDescriptionAdminProps {
     user: any
@@ -13,8 +14,13 @@ interface ChangeDescriptionAdminProps {
 
 export default function ChangeDescriptionAdmin({ user, data, name, html }: ChangeDescriptionAdminProps) {
     const Accueil = data
+    const [text, setText] = useState(
+        (name == 'Description') ? Accueil.Description : (
+            (name == 'Description_Salle_1') ? Accueil.Description_Salle_1 : (
+                (name == 'Description_Salle_2') ? Accueil.Description_Salle_2 : ""
+    )))
     const [click, setClick] = useState(1)
-    const [text, setText] = useState(Accueil.Slogan)
+    const Router = useRouter();
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -29,7 +35,11 @@ export default function ChangeDescriptionAdmin({ user, data, name, html }: Chang
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(Accueil)
         })
-        setClick(1)
+        try {
+            Router.refresh()
+        } finally {
+            setClick(1)
+        }
     }
 
     if (!user)
@@ -54,12 +64,7 @@ export default function ChangeDescriptionAdmin({ user, data, name, html }: Chang
                     <form onSubmit={handleSubmit} className="flex flex-row justify-center align-middle w-[70%] mr-1">
                         <textarea  
                             name={html} 
-                            defaultValue={
-                                (name == 'Description') ? Accueil.Description : (
-                                    (name == 'Description_Salle_1') ? Accueil.Description_Salle_1 : (
-                                        (name == 'Description_Salle_2') ? Accueil.Description_Salle_2 : ""
-                                ))
-                            } 
+                            defaultValue={text} 
                             onChange={(event) => {setText(event.target.value)}}
                             className="w-[90%] bg-transparent focus:ring-red-b"
                         />

@@ -1,10 +1,12 @@
 'use client'
 
-import Image from "next/image";
+import { useRouter } from "next/navigation"
 import { useState } from "react"
+import Image from "next/image";
 
 export default function CreateRubriqueAdmin({ Carte }: any) {
     const [createButton, setCreateButton] = useState(1)
+    const Router = useRouter();
     let ordre = 0;
     Carte.map(() => {ordre++})
 
@@ -24,7 +26,11 @@ export default function CreateRubriqueAdmin({ Carte }: any) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(Carte)
         })
-        setCreateButton(1)
+        try {
+            Router.refresh()
+        } finally {
+            setCreateButton(1)
+        }
     }
 
     return (

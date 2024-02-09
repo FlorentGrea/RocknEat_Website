@@ -1,10 +1,12 @@
 'use client'
 
-import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
+import Image from "next/image"
 
 export default function ModifyArticleAdmin({ carte, rubrique, article }: any) {
     const [modifyButton, setModifyButton] = useState(1)
+    const Router = useRouter();
     let ordreMax = 0
     let new_ordre = article.ordre
     
@@ -31,7 +33,11 @@ export default function ModifyArticleAdmin({ carte, rubrique, article }: any) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(carte)
         })
-        setModifyButton(1)
+        try {
+            Router.refresh()
+        } finally {
+            setModifyButton(1)
+        }
     }
 
     function handleDelete () {
@@ -58,7 +64,11 @@ export default function ModifyArticleAdmin({ carte, rubrique, article }: any) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(carte)
         })
-        setModifyButton(1)
+        try {
+            Router.refresh()
+        } finally {
+            setModifyButton(1)
+        }
     }
     
     useEffect (() => {

@@ -2,15 +2,14 @@ import AddPhotosAdmin from './Photos Components/AddPhotosAdmin';
 import PhotoDisplay from './Photos Components/PhotoDisplay'
 import { getSession } from "@auth0/nextjs-auth0";
 import { PhotoData } from '../types';
-import { promises as fs } from 'fs';
-import path from 'path';
+import PocketBase from 'pocketbase';
 
 export default async function PhotosPage() {
     const session = await getSession();
     const user = session?.user;
-    const actual_path = path.join(process.cwd(), 'json')
-    const file = await fs.readFile(actual_path + '/photosData.json', 'utf8');
-    const photosDb = await JSON.parse(file)
+    const pb = new PocketBase(process.env.DB_ADDR);
+    const record = await pb.collection('Jsons').getOne('hpvt7kkx079szsb', { cache: 'no-store' })
+    const photosDb = JSON.parse(JSON.stringify(record.json_file))
     var lieux: PhotoData[] = []
     var concerts: PhotoData[] = []
     var affiches: PhotoData[] = []

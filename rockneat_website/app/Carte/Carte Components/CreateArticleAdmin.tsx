@@ -1,10 +1,12 @@
 'use client'
 
-import Image from "next/image";
+import { useRouter } from "next/navigation"
 import { useState } from "react";
+import Image from "next/image";
 
 export default function CreateArticleAdmin({ carte, rubrique }: any) {
     const [newArticleButton, setNewArticleButton] = useState(1)
+    const Router = useRouter();
     let ordre = 0;
 
     rubrique.articles.map(() => {ordre++})
@@ -27,7 +29,11 @@ export default function CreateArticleAdmin({ carte, rubrique }: any) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(carte)
         })
-        setNewArticleButton(1)
+        try {
+            Router.refresh()
+        } finally {
+            setNewArticleButton(1)
+        }
     }
 
     return (

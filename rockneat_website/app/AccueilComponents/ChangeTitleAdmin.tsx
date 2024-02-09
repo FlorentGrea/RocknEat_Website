@@ -1,8 +1,9 @@
 'use client'
 
-import Image from "next/image"
-import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { AccueilData } from "../types"
+import { useState } from "react"
+import Image from "next/image"
 
 interface ChangeTitleAdminProps {
     user: any
@@ -13,8 +14,13 @@ interface ChangeTitleAdminProps {
 
 export default function ChangeTitleAdmin({ user, data, name, html }: ChangeTitleAdminProps) {
     const Accueil = data
+    const [text, setText] = useState(
+        (name == 'Slogan') ? Accueil.Slogan : (
+            (name == 'Nom_Salle_1') ? Accueil.Nom_Salle_1 : (
+                (name == 'Nom_Salle_2') ? Accueil.Nom_Salle_2 :  ""
+    )))
     const [click, setClick] = useState(1)
-    const [text, setText] = useState(Accueil.Slogan)
+    const Router = useRouter();
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -29,7 +35,11 @@ export default function ChangeTitleAdmin({ user, data, name, html }: ChangeTitle
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(Accueil)
         })
-        setClick(1)
+        try {
+            Router.refresh()
+        } finally {
+            setClick(1)
+        }
     }
 
     if (!user)
@@ -55,12 +65,7 @@ export default function ChangeTitleAdmin({ user, data, name, html }: ChangeTitle
                         <input 
                             type="text" 
                             name={html} 
-                            defaultValue={
-                                (name == 'Slogan') ? Accueil.Slogan : (
-                                        (name == 'Nom_Salle_1') ? Accueil.Nom_Salle_1 : (
-                                            (name == 'Nom_Salle_2') ? Accueil.Nom_Salle_2 :  ""
-                                ))
-                            } 
+                            defaultValue={text} 
                             onChange={(event) => {setText(event.target.value)}}
                             className="w-[90%] bg-transparent focus:ring-red-b"
                         />

@@ -1,17 +1,17 @@
 import SubmitButtonPhoto from "./SubmitButtonPhoto";
 import { revalidatePath } from "next/cache";
 import { PhotoData } from "../../types";
-import { promises as fs } from "fs";
+import PocketBase from 'pocketbase';
 import Image from "next/image";
-import path from "path";
+
 
 interface OnePhotoProps {
     photosDb: PhotoData[]
     displayedPhoto: PhotoData
+    id: string
 }
 
-export default function ModifyPhotoAdmin({ photosDb, displayedPhoto }: OnePhotoProps) {
-    const actual_path = path.join(process.cwd(), 'json')
+export default function ModifyPhotoAdmin({ photosDb, displayedPhoto, id }: OnePhotoProps) {
     let maxOrder = 0;
     
     photosDb.map((photo) => {
@@ -21,6 +21,8 @@ export default function ModifyPhotoAdmin({ photosDb, displayedPhoto }: OnePhotoP
 
     async function mooveUp () {
         'use server'
+
+        const pb = new PocketBase(process.env.DB_ADDR);
         
         for (let index = 0; photosDb[index]; index++) {
             if (photosDb[index].type == displayedPhoto.type) {
@@ -30,13 +32,19 @@ export default function ModifyPhotoAdmin({ photosDb, displayedPhoto }: OnePhotoP
                     photosDb[index].order = displayedPhoto.order - 1
             }
         }
-        await fs.writeFile(actual_path + '/photosData.json', JSON.stringify(photosDb))
+        const post_data = {
+            "json_name": 'photosData',
+            "json_file": JSON.stringify(photosDb)
+        }
+        await pb.collection('Jsons').update('hpvt7kkx079szsb', post_data);
         revalidatePath("/Photos");
     }
 
     async function mooveDown() {
         'use server'
 
+        const pb = new PocketBase(process.env.DB_ADDR);
+        
         for (let index = 0; photosDb[index]; index++) {
             if (photosDb[index].type == displayedPhoto.type) {
                 if (photosDb[index].order == displayedPhoto.order + 1)
@@ -45,13 +53,22 @@ export default function ModifyPhotoAdmin({ photosDb, displayedPhoto }: OnePhotoP
                     photosDb[index].order = displayedPhoto.order + 1
             }
         }
-        await fs.writeFile(actual_path + '/photosData.json', JSON.stringify(photosDb))
+        const post_data = {
+            "json_name": 'photosData',
+            "json_file": JSON.stringify(photosDb)
+        }
+        await pb.collection('Jsons').update('hpvt7kkx079szsb', post_data);
         revalidatePath("/Photos");
     }
 
     async function deleteImage() {
         'use server'
 
+        const pb = new PocketBase(process.env.DB_ADDR);
+        
+        await pb.collection('Photos').update(id, {
+            'Images-': [displayedPhoto.src],
+        });
         const order = displayedPhoto.order
         for (let index = 0; photosDb[index]; index++) {
             if (photosDb[index].type == displayedPhoto.type)
@@ -65,8 +82,11 @@ export default function ModifyPhotoAdmin({ photosDb, displayedPhoto }: OnePhotoP
         newData = newData.filter(( element ) => {
             return element !== undefined;
         });
-        await fs.unlink('/' + displayedPhoto.type + '/' + displayedPhoto.src);
-        await fs.writeFile(actual_path + '/photosData.json', JSON.stringify(newData))
+        const post_data = {
+            "json_name": 'photosData',
+            "json_file": JSON.stringify(newData)
+        }
+        await pb.collection('Jsons').update('hpvt7kkx079szsb', post_data);
         revalidatePath("/Photos");
     }
     
