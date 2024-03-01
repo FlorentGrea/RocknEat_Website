@@ -26,7 +26,7 @@ export default async function PhotoDisplay ({ photosDb, photosList }: PhotoDispl
                 {photosList.map((photo: PhotoData) => {
 
                     return (
-                        <div key={photo.order} className="relative break-inside-avoid w-full mb-2 md:max-h-96 bg-black/70 p-1">
+                        <div key={photo.order} className={`relative break-inside-avoid w-full mb-2 md:max-h-96 bg-black bg-gradient-to-tl from-red/20 via-black to-black shadow-sm shadow-black/30 p-[2px] animate-slide-bottom-d${photo.order % 5 + 1}`}>
                             { user && <ModifyPhotoAdmin photosDb={photosDb} displayedPhoto={photo} id={id} /> }
                             <Image
                                 src={process.env.DB_ADDR + 'api/files/Photos/' + id + '/' + photo.src}

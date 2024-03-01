@@ -15,11 +15,11 @@ async function Article({ carte, rubrique, article }: any) {
         <div className={"flex flex-col " + (article.Description && "mb-3 ")}>
             <div className="flex flex-row">
                 { article.Vege &&
-                    <p className="mr-1 text-sm leading-6 text-green-500" id={"modify" + 'R' + rubrique.ordre + '1A' + article.ordre}>
+                    <p className="mr-1 text-sm lg:text-base xl:text-lg font-bold leading-6 text-green-500" id={"modify" + 'R' + rubrique.ordre + '1A' + article.ordre}>
                         {article.Vege ? "VÉGÉ • " : ""}
                     </p>
                 }
-                <p className="font-bold flex-grow" id={"modify" + 'R' + rubrique.ordre + '2A' + article.ordre}>{article.Titre}</p>
+                <p className="text-sm lg:text-base xl:text-lg font-bold flex-grow" id={"modify" + 'R' + rubrique.ordre + '2A' + article.ordre}>{article.Titre}</p>
                 { article.Prix ?
                     <p id={"modify" + 'R' + rubrique.ordre + '3A' + article.ordre}>
                         {article.Prix + ' €'}
@@ -29,7 +29,7 @@ async function Article({ carte, rubrique, article }: any) {
                 { user && <MooveArticleAdmin carte={carte} rubrique={rubrique} article={article} />}
             </div>
             { article.Description && 
-                <p className="text-sm w-full" id={"modify" + 'R' + rubrique.ordre + '4A' + article.ordre}>
+                <p className="text-xs lg:text-sm xl:text-base w-full" id={"modify" + 'R' + rubrique.ordre + '4A' + article.ordre}>
                     {article.Description}
                 </p> 
             }
@@ -52,19 +52,18 @@ export default async function CartePage() {
     })
 
     return (
-        <div className='flex flex-col m-auto w-full'>
+        <div className='flex flex-col m-auto w-full mt-4 sm:mt-6 md:mt-8 lg:mt-14'>
             { user && <CreateRubriqueAdmin Carte={Carte} />}
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-center py-5">CARTE</h1>
             <div className="columns-1 md:columns-2 break-inside-auto gap-2 w-full">
                 { Carte.map((rubrique: any) => {
                     return (
-                        <div key={key++} className="inline-block w-full bg-black/70 p-3 mb-2">
+                        <div key={key++} className={`inline-block w-full bg-black bg-gradient-to-tl from-red/20 via-black to-black shadow-sm shadow-black/30 p-3 mb-2 animate-slide-bottom-d${rubrique.ordre + 1}`}>
                             <div className="flex flex-row">
-                                <h1 className="text-xl font-bold mb-2 mr-1" id={"modify" + '1R' + rubrique.ordre}>{rubrique.type}</h1>
+                                <h1 className="text-sm lg:text-base xl:text-lg font-bold mb-2 mr-1" id={"modify" + '1R' + rubrique.ordre}>{rubrique.type}</h1>
                                 { user && <ModifyRubriqueAdmin carte={Carte} rubrique={rubrique} /> }
                                 { user && <MooveRubriqueAdmin carte={Carte} rubrique={rubrique} />}
                             </div>
-                            <p className="text-red whitespace-pre-line" id={"modify" + '2R' + rubrique.ordre}>{rubrique.description}</p>
+                            <p className="text-xs lg:text-sm xl:text-base text-red font-semibold whitespace-pre-line" id={"modify" + '2R' + rubrique.ordre}>{rubrique.description}</p>
                             { rubrique.articles.map((article: any) => {
                                 return <Article key={key++} carte={Carte} rubrique={rubrique} article={article} />
                             })}

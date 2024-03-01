@@ -3,6 +3,7 @@ import PhotoDisplay from './Photos Components/PhotoDisplay'
 import { getSession } from "@auth0/nextjs-auth0";
 import { PhotoData } from '../types';
 import PocketBase from 'pocketbase';
+import SmoothScroll from './Photos Components/smoothScroll';
 
 export default async function PhotosPage() {
     const session = await getSession();
@@ -28,19 +29,42 @@ export default async function PhotosPage() {
     affiches.sort((a: PhotoData, b: PhotoData) =>  a.order - b.order);
 
     return (
-        <div className='flex flex-col m-auto'>
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-center py-5">PHOTOS</h1>
+        <div className='flex flex-col m-auto mt-4'>
             { user && <AddPhotosAdmin photosDb={photosDb} /> }
             <div className='mb-4'>
-                <h1 className='text-xl font-bold text-center py-4'>LE LIEU</h1>
+                <div id="lieu" className='flex flex-row justify-center scroll-mt-[100rem]'>
+                    <h1 className='text-xl font-bold text-center text-red py-4 animate-slide-bottom-d1 mx-3'>LE LIEU</h1>
+                    <SmoothScroll href="#concerts">
+                        <h1 className='text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LES CONCERTS</h1>
+                    </SmoothScroll>
+                    <SmoothScroll href="#affiches">
+                        <h1 className='text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LES AFFICHES</h1>
+                    </SmoothScroll>
+                </div>
                 <PhotoDisplay photosDb={photosDb} photosList={lieux} />
             </div>
             <div className='mb-4'>
-                <h1 className='text-xl font-bold text-center py-4'>LES CONCERTS</h1>
+                <div id="concerts" className='flex flex-row justify-center scroll-mt-24'>
+                    <SmoothScroll href="#lieu">
+                        <h1 className='text-xl font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LE LIEU</h1>
+                    </SmoothScroll>
+                    <h1 className='text-xl font-bold text-center text-red py-4 mx-3'>LES CONCERTS</h1>
+                    <SmoothScroll href="#affiches">
+                        <h1 className='text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LES AFFICHES</h1>
+                    </SmoothScroll>
+                </div>
                 <PhotoDisplay photosDb={photosDb} photosList={concerts} />
             </div>
             <div className='mb-4'>
-                <h1 className='text-xl font-bold text-center py-4'>LES AFFICHES</h1>
+                <div id="affiches" className='flex flex-row justify-center scroll-mt-24'>
+                    <SmoothScroll href="#lieu">
+                        <h1 className='text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LE LIEU</h1>
+                    </SmoothScroll>
+                    <SmoothScroll href="#concerts">
+                        <h1 className='text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LES CONCERTS</h1>
+                    </SmoothScroll>
+                    <h1 className='text-xl font-bold text-center text-red py-4 mx-3'>LES AFFICHES</h1>
+                </div>
                 <PhotoDisplay photosDb={photosDb} photosList={affiches} />
             </div>
         </div>

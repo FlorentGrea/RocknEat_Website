@@ -20,7 +20,6 @@ export default function MooveRubriqueAdmin({ carte, rubrique }: any) {
                 carte[index].ordre = rubrique.ordre
             else if (carte[index].ordre == rubrique.ordre) 
                 carte[index].ordre = rubrique.ordre - 1
-            console.log(carte[index], carte[index].ordre)
         }
         const jsonData = {
             "json_file": JSON.stringify(carte)
