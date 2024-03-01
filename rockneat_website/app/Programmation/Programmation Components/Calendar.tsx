@@ -39,7 +39,7 @@ function DisplayEvents({ db_events, chosenDate }: displayEventsProps) {
 
                         if (el.event.title && date >= firstDay) {
                             return (
-                                <div  key={key++ + 'smallscreen'} className="group relative h-24 mb-1 shadow-sm shadow-black/30 transform hover:h-56 transition-all duration-300">
+                                <div  key={key++ + 'smallscreen'} className="group relative h-24 mb-1 shadow-sm shadow-black/30 transform hover:h-56 transition-all duration-300 overflow-hidden">
                                     { el.date.toDateString() == actualDate.toDateString() && <div className="absolute w-full h-full border-solid border-2 border-red z-30"/>}
                                     <div className="absolute flex items-center justify-center text-center text-[10px] sm:text-[12px] lg:text-[11px] font-bold w-[18%] h-6 top-0 right-0 bg-red z-40">
                                         { el.date.toLocaleString('fr-FR', {day: 'numeric' })}
@@ -114,7 +114,7 @@ function DisplayEvents({ db_events, chosenDate }: displayEventsProps) {
                             const date = new Date(el.event.date)
 
                             return (
-                                <div key={key++ + 'bigscreen'} className={`group relative w-[14%] aspect-square mr-[0.28%] mb-[0.28%] z-20 ${el.date.toDateString() == actualDate.toDateString() && "border-solid border-2 border-red z-30"}`}>
+                                <div key={key++ + 'bigscreen'} className={`group relative w-[14%] aspect-square mr-[0.28%] mb-[0.28%] z-20 ${el.date.toDateString() == actualDate.toDateString() && "border-solid border-2 border-red z-30"} overflow-hidden`}>
                                     <div className="absolute flex items-center justify-center text-center text-[10px] sm:text-[12px] lg:text-[11px] font-bold w-[18%] h-[18%] top-0 right-0 bg-red z-[60]">
                                         { el.date.toLocaleString('fr-FR', {day: 'numeric' })}
                                     </div>

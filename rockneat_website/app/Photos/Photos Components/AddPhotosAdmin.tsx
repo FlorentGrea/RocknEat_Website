@@ -1,9 +1,6 @@
 import SubmitButtonPhoto from "./SubmitButtonPhoto";
-import { revalidatePath } from "next/cache";
 import { PhotoData } from "../../types";
 import PocketBase, { RecordModel } from 'pocketbase';
-import { promises as fs } from "fs";
-import path from "path";
 
 interface PhotoDisplayProps {
     photosDb: PhotoData[]
@@ -68,20 +65,6 @@ export default function AddPhotosAdmin({ photosDb }: PhotoDisplayProps) {
             "json_file": JSON.stringify(newData)
         }
         await pb.collection('Jsons').update('hpvt7kkx079szsb', post_data);
-        //for (const image of Image_array) {
-        //    const data = {
-        //        type: type,
-        //        order: ordre++,
-        //        src: (image as File).name
-        //    }
-        //    newData.push(data)
-        //    const bytes = await (image as File).arrayBuffer()
-        //    const buffer = Buffer.from(bytes)
-        //    await fs.writeFile('/' + data.type + '/' + data.src, buffer)
-        //}
-        //const actual_path = path.join(process.cwd(), 'json')
-        //await fs.writeFile(actual_path + '/photosData.json', JSON.stringify(newData));
-        //revalidatePath("/Photos")
     }
     
     return (
