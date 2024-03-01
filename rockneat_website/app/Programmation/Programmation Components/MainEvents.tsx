@@ -8,7 +8,7 @@ interface DisplayEventProps {
 function DisplayEvent({ event }: DisplayEventProps) {
 
     return (
-        <div className="group relative w-full h-full shadow-sm shadow-black/30 overflow-hidden">
+        <div className="group relative w-full h-full shadow-sm shadow-black/30 hover:shadow-black/80 overflow-hidden">
             <Image
                 src={
                     event.image ?
@@ -35,13 +35,13 @@ function DisplayEvent({ event }: DisplayEventProps) {
                 }
             </div>
             <div className='absolute w-full h-full top-0 bg-gradient-to-tr from-black/100 to-white/10 group-hover:bg-white/5'/>
+            <div className="absolute right-[0%] top-[0%] p-1 text-center w-fit px-1 mb-1 text-[8px] min-[375px]:text-[10px] sm:text-xs xl:text-sm font-bold bg-red">
+                { (new Date(event.date).toLocaleDateString('fr-FR', {weekday: 'long', day: '2-digit', month: 'long'})).toUpperCase() }
+            </div>
             <div className="group absolute w-[90%] h-[70%] bottom-[10%] left-[5%] z-30">
-                <div className="absolute flex flex-col w-full transform group-hover:place-content-end group-hover:bottom-[5%] top-[75%] transition-all duration-500">
-                    <div className="relative left-[-5%] text-left w-fit px-1 mb-1 text-[8px] min-[375px]:text-[10px] sm:text-xs xl:text-sm font-bold bg-red">
-                        { (new Date(event.date).toLocaleDateString('fr-FR', {weekday: 'long', day: '2-digit', month: 'long'})).toUpperCase() }
-                    </div>
+                <div className="absolute flex flex-col w-full transform place-content-end bottom-[5%] animate-slide-top group-hover:animate-slide-bottom">
                     <h1 className="text-left text-[8px] min-[375px]:text-[10px] sm:text-xs xl:text-sm font-bold">{ event.title.toUpperCase() }</h1>
-                    <h1 className="opacity-0 transform group-hover:opacity-100 transition-all duration-500 text-left text-[8px] min-[375px]:text-[10px] sm:text-xs xl:text-sm font-bold">{ event.description }</h1>
+                    <h1 className="hidden transform group-hover:flex text-left text-[8px] min-[375px]:text-[10px] sm:text-xs xl:text-sm font-bold">{ event.description }</h1>
                     { event.link ?
                         <a href={event.link} target="_blank" className="hidden group-hover:flex flex-row self-center w-fit h-4 sm:h-6 px-2 my-1 text-[8px] min-[375px]:text-[10px] sm:text-xs xl:text-sm font-bold bg-red">
                             <span className="m-auto">Réserver</span>

@@ -5,8 +5,12 @@ import { getSession } from '@auth0/nextjs-auth0';
 import { AccueilData } from './types';
 import PocketBase from 'pocketbase';
 import Image from 'next/image';
-import { promises as fs } from 'fs';
+import { redirect } from 'next/navigation';
 
+export default async function HomePage() {
+  redirect('/Programmation')
+}
+/*
 export default async function HomePage() {
   const pb = new PocketBase(process.env.DB_ADDR);
   const record = await pb.collection('Jsons').getOne('zggxukzkdiujtsf', { cache: 'no-store' })
@@ -84,4 +88,4 @@ export default async function HomePage() {
       </div>
     </div>
   );
-}
+}*/

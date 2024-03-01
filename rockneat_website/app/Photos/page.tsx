@@ -33,12 +33,12 @@ export default async function PhotosPage() {
             { user && <AddPhotosAdmin photosDb={photosDb} /> }
             <div className='mb-4'>
                 <div id="lieu" className='flex flex-row justify-center scroll-mt-[100rem]'>
-                    <h1 className='text-xl font-bold text-center text-red py-4 animate-slide-bottom-d1 mx-3'>LE LIEU</h1>
+                    <h1 className='text-sm sm:text-baseline xl:text-lg font-bold text-center text-red py-4 animate-slide-bottom-d1 mx-3'>LE LIEU</h1>
                     <SmoothScroll href="#concerts">
-                        <h1 className='text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LES CONCERTS</h1>
+                        <h1 className='text-sm sm:text-baseline xl:text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LES CONCERTS</h1>
                     </SmoothScroll>
                     <SmoothScroll href="#affiches">
-                        <h1 className='text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LES AFFICHES</h1>
+                        <h1 className='text-sm sm:text-baseline xl:text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LES AFFICHES</h1>
                     </SmoothScroll>
                 </div>
                 <PhotoDisplay photosDb={photosDb} photosList={lieux} />
@@ -46,11 +46,11 @@ export default async function PhotosPage() {
             <div className='mb-4'>
                 <div id="concerts" className='flex flex-row justify-center scroll-mt-24'>
                     <SmoothScroll href="#lieu">
-                        <h1 className='text-xl font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LE LIEU</h1>
+                        <h1 className='text-sm sm:text-baseline xl:text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LE LIEU</h1>
                     </SmoothScroll>
-                    <h1 className='text-xl font-bold text-center text-red py-4 mx-3'>LES CONCERTS</h1>
+                    <h1 className='text-sm sm:text-baseline xl:text-lg font-bold text-center text-red py-4 mx-3'>LES CONCERTS</h1>
                     <SmoothScroll href="#affiches">
-                        <h1 className='text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LES AFFICHES</h1>
+                        <h1 className='text-sm sm:text-baseline xl:text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LES AFFICHES</h1>
                     </SmoothScroll>
                 </div>
                 <PhotoDisplay photosDb={photosDb} photosList={concerts} />
@@ -58,12 +58,12 @@ export default async function PhotosPage() {
             <div className='mb-4'>
                 <div id="affiches" className='flex flex-row justify-center scroll-mt-24'>
                     <SmoothScroll href="#lieu">
-                        <h1 className='text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LE LIEU</h1>
+                        <h1 className='text-sm sm:text-baseline xl:text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LE LIEU</h1>
                     </SmoothScroll>
                     <SmoothScroll href="#concerts">
-                        <h1 className='text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LES CONCERTS</h1>
+                        <h1 className='text-sm sm:text-baseline xl:text-lg font-semibold text-center py-4 animate-slide-bottom-d1 mx-3'>LES CONCERTS</h1>
                     </SmoothScroll>
-                    <h1 className='text-xl font-bold text-center text-red py-4 mx-3'>LES AFFICHES</h1>
+                    <h1 className='text-sm sm:text-baseline xl:text-lg font-bold text-center text-red py-4 mx-3'>LES AFFICHES</h1>
                 </div>
                 <PhotoDisplay photosDb={photosDb} photosList={affiches} />
             </div>

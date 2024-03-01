@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <UserProvider>
         <body className="relative min-h-[100vh] pb-14 bg-[url('/bg.jpg')] bg-fixed bg-cover bg-top bg-white/10">
           <header className="relative h-20 md:h-28 lg:h-36 w-[90%] lg:w-[80%] 2xl:w-[70%] m-auto flex flex-row justify-end">
-            <Link href="/" className='absolute top-[10%] md:top-[15%] left-[-1%] lg:left-[-4%] 2xl:left-[-8%] w-[25vw] min-[425px]:w-[19vw] sm:w-[16vw] lg:w-[12vw] 2xl:w-[10vw] z-50'>
+            <Link href="/Programmation" className='absolute top-[10%] md:top-[15%] left-[-1%] lg:left-[-4%] 2xl:left-[-8%] w-[25vw] min-[425px]:w-[19vw] sm:w-[16vw] lg:w-[12vw] 2xl:w-[10vw] z-50'>
                 <Image
                     src="/Rockneat_img.webp"
                     width={445}
