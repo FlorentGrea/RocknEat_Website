@@ -1,46 +1,43 @@
 'use client'
 
-import { useRouter } from "next/navigation"
-import { useState } from "react"
+import {  useState } from "react"
+import { v4 as uuidv4 } from 'uuid';
 import Image from "next/image";
 
-export default function CreateRubriqueAdmin({ Carte }: any) {
+interface CreateRubriqueAdminProps {
+    newCarte: any,
+    setNewCarte: React.SetStateAction<any>,
+}
+
+export default function CreateRubriqueAdmin({ newCarte, setNewCarte }: CreateRubriqueAdminProps) {
     const [createButton, setCreateButton] = useState(1)
-    const Router = useRouter();
-    let ordre = 0;
-    Carte.map(() => {ordre++})
 
     function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        const new_rubrique = {       
+
+        const tmpCarte= [...newCarte]
+        const new_rubrique = {
             "type": (event as any).target[0].value,
             "description": (event as any).target[1].value,
-            "ordre": ordre,
+            "id": uuidv4(),
             "pos_y": 0,
             "pos_x": 0,
             "articles": []
         }
-        Carte.push(new_rubrique)
-        fetch('/api/Carte', {
-            method: 'POST', 
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(Carte)
-        })
-        try {
-            Router.refresh()
-        } finally {
-            setCreateButton(1)
-        }
+
+        tmpCarte.push(new_rubrique)
+        setNewCarte(tmpCarte)
+        setCreateButton(1)
     }
 
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-3">
             { createButton ? (
-                <button className="text-lg bg-black px-3 py-1 mb-2 mt-5 shadow shadow-red-b" onClick={() => {setCreateButton(0)}}>
+                <button className="text-lg font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white" onClick={() => {setCreateButton(0)}}>
                     Créer une rubrique
                 </button>
             ):(
-                <div className="flex flex-row bg-black/70 p-2 mt-3">
+                <div className="flex flex-row bg-black/70 bg-black bg-gradient-to-tl from-red/20 via-black to-black shadow-sm shadow-black/30 p-2 mt-3">
                     <form onSubmit={handleFormSubmit} className="flex flex-col ml-5">
                         <label htmlFor="title" className="text-center">Titre</label>
                         <input className="mb-1 border-[1px] border-gray-500 bg-transparent focus:ring-red-b focus:border-transparent" name="title" required defaultValue='' />
@@ -48,7 +45,7 @@ export default function CreateRubriqueAdmin({ Carte }: any) {
                         <label htmlFor="description" className="text-center">Description</label>
                         <textarea name="description" className="bg-transparent focus:ring-red-b focus:border-transparent" cols={30} rows={5} defaultValue='' />
 
-                        <input type="submit" className="text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b" value="Créer" />
+                        <input type="submit" className="text-lg font-semibold px-3 py-1 mb-2 mt-5 bg-black rounded-md border-2 border-red hover:border-white" value="Créer" />
                     </form>
                     <button className="self-start" onClick={() => {setCreateButton(1)}}>
                         <Image

@@ -30,9 +30,16 @@ export interface EventsData {
 }
 
 export interface PhotoData {
-    type: string
-    order: number
+    id: string
+    p_id: string
     src: string
+}
+
+export interface PhotoList {
+    type: string
+    id: string
+    p_id: string
+    photos: PhotoData[]
 }
 
 export interface AccueilData {

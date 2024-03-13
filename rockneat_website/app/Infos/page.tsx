@@ -25,7 +25,7 @@ export default async function InfosPage() {
                     { user ? (
                         <InfosAdmin data={Infos} htmlName='Mail' />
                       ):(
-                        <button className="w-fit text-xs lg:text-sm xl:text-base m-auto bg-red px-3 py-1 my-1 shadow-sm shadow-white/30">
+                        <button className="w-fit text-xs lg:text-sm xl:text-base m-auto font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white">
                             <a href={"mailto:" + Infos.Mail} target="_blank" className='flex flex-row justify-center'>
                                 <Image
                                     src="/mail.svg"
@@ -44,7 +44,7 @@ export default async function InfosPage() {
                     { user ? (
                         <InfosAdmin data={Infos} htmlName='Facebook' />
                       ):(
-                        <button className="w-fit text-xs lg:text-sm xl:text-base m-auto bg-red px-3 py-1 my-1 shadow-sm shadow-white/30">
+                        <button className="w-fit text-xs lg:text-sm xl:text-base m-auto font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white">
                             <a href={Infos.Facebook} target="_blank" className='flex flex-row justify-center'>
                                 <Image
                                     src="/fb.svg"
@@ -66,7 +66,7 @@ export default async function InfosPage() {
                   ):(
                     <p className='text-xs lg:text-sm xl:text-base'>{Infos.Horaires}</p>
                 )}
-                <button className="m-auto text-center text-xs lg:text-sm xl:text-base bg-red px-3 py-1 my-1 shadow-sm shadow-white/30">
+                <button className="mt-1 text-center text-xs lg:text-sm xl:text-base m-auto font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white">
                     <Link href="/Programmation">
                         Programmation
                     </Link>

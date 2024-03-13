@@ -21,7 +21,7 @@ export default function InfosAdmin({ data, htmlName }: InfosAdminProps) {
     const [lng, setLng] = useState(Infos.Map_lng)
     const line: lineType = {
         'Mail': 
-            <button className="w-fit text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b ml-5">
+            <button className="w-fit text-xs lg:text-sm xl:text-base font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white ml-5">
                 <a href={"mailto:" + Infos.Mail} target="_blank" className='flex flex-row justify-center'>
                     <Image
                         src="/mail.svg"
@@ -34,7 +34,7 @@ export default function InfosAdmin({ data, htmlName }: InfosAdminProps) {
                 </a>    
             </button>,
         'Facebook':                     
-            <button className="w-fit text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b ml-5">
+            <button className="w-fit text-xs lg:text-sm xl:text-base font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white ml-5">
                 <a href={Infos.Facebook} target="_blank" className='flex flex-row justify-center'>
                     <Image
                         src="/fb.svg"
@@ -88,7 +88,7 @@ export default function InfosAdmin({ data, htmlName }: InfosAdminProps) {
     return (
         <div>
             {click ? (
-                <div className={ "flex flex-row " + ((htmlName == 'Mail' || htmlName == 'Facebook' || htmlName == 'Horaires') && "justify-center")}>
+                <div className={ "group flex flex-row " + ((htmlName == 'Mail' || htmlName == 'Facebook' || htmlName == 'Horaires') && "justify-center")}>
                     {line[htmlName]}
                     <button onClick={(event) => {setClick(0)}} className="self-start">
                         <Image
@@ -96,7 +96,14 @@ export default function InfosAdmin({ data, htmlName }: InfosAdminProps) {
                             width={40}
                             height={40}
                             alt="Mail"
-                            className="object-contain h-4 w-4 ml-1 filter-white"
+                            className="group-hover:hidden object-contain h-4 w-4 ml-1 filter-white"
+                        />
+                        <Image
+                            src="/edit-write.svg"
+                            width={40}
+                            height={40}
+                            alt="Mail"
+                            className="hidden group-hover:block object-contain h-4 w-4 ml-1 filter-red"
                         />
                     </button>
                 </div>

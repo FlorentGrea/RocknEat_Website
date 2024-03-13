@@ -1,68 +1,69 @@
 'use client'
 
-import { useRouter } from "next/navigation"
+import { v4 as uuidv4 } from 'uuid';
 import { useState } from "react";
 import Image from "next/image";
 
-export default function CreateArticleAdmin({ carte, rubrique }: any) {
-    const [newArticleButton, setNewArticleButton] = useState(1)
-    const Router = useRouter();
-    let ordre = 0;
 
-    rubrique.articles.map(() => {ordre++})
+interface CreateArticleAdminProps {
+    newCarte: any,
+    setNewCarte: React.SetStateAction<any>,
+    rubrique: any
+}
+
+export default function CreateArticleAdmin({ newCarte, setNewCarte, rubrique }: CreateArticleAdminProps) {
+    const [newArticleButton, setNewArticleButton] = useState(1)
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
+        
+        const tmpCarte= [...newCarte]
         const new_article = {
-            "Description": (event as any).target[1].value,
+            "Description": (event as any).target[3].value,
             "Prix": (event as any).target[2].value,
-            "ordre": ordre,
-            "Titre": (event as any).target[0].value,
-            "Vege": (event as any).target[3].checked
+            "id": uuidv4(),
+            "Titre": (event as any).target[1].value,
+            "Vege": (event as any).target[0].checked
         }
-        carte.map((rubrique_db: any, index: number) => {
+
+        tmpCarte.map((rubrique_db: any, index: number) => {
             if (rubrique_db.type == rubrique.type)
-                carte[index].articles.push(new_article)
+                tmpCarte[index].articles.push(new_article)
         })
-        fetch('/api/Carte', {
-            method: 'POST', 
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(carte)
-        })
-        try {
-            Router.refresh()
-        } finally {
-            setNewArticleButton(1)
-        }
+        setNewCarte(tmpCarte)
+        setNewArticleButton(1)
     }
 
     return (
         <div className="flex justify-center w-full">
             { newArticleButton ? (
-                <button className="w-fit text-lg bg-black px-3 py-1 my-2 shadow shadow-red-b" onClick={() => {setNewArticleButton(0)}}>
+                <button className="text-lg font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white" onClick={() => {setNewArticleButton(0)}}>
                     Ajouter un article
                 </button>
             ):(
-                <div className="flex flex-row">
-                    <form onSubmit={handleSubmit} className="flex flex-col ml-5">
-                        <label htmlFor="title" className="text-center">Titre</label>
-                        <input name="title" required defaultValue={''} className="mb-1 border-[1px] border-gray-500 bg-transparent focus:ring-red-b focus:border-transparent"/>
-
-                        <label htmlFor="description" className="text-center">Description</label>
-                        <textarea name="description" cols={30} rows={5} defaultValue={''} className="mb-1 border-[1px] border-gray-500 bg-transparent focus:ring-red-b focus:border-transparent"/>
-
+                <div className="flex flex-row w-[80%]">
+                    <form onSubmit={handleSubmit} className="flex flex-col w-full">
                         <div className="flex flex-row">
-                            <div className="flex flex-col">
-                                <label htmlFor="Price" className="text-white">Prix</label>
-                                <input name="Price" type="number" defaultValue={0} className="mb-1 border-[1px] border-gray-500 bg-transparent focus:ring-red-b focus:border-transparent" />
-                            </div>
-                            
                             <div className="flex flex-col align-middle">
                                 <label htmlFor="Vege">Végé</label>
                                 <input name="Vege" type="checkbox" className="self-center w-6 h-6 mt-2 mb-1 border-[1px] border-gray-500 bg-transparent focus:ring-red-b focus:border-transparent"/>
                             </div>
+
+                            <div className="flex flex-col align-middle mx-2 flex-grow">
+                                <label htmlFor="title" className="text-center">Titre</label>
+                                <input name="title" required defaultValue={''} className="mb-1 h-10 border-[1px] border-gray-500 bg-transparent focus:ring-red-b focus:border-transparent"/>
+                            </div>
+
+                            <div className="flex flex-col align-middle w-[20%]">
+                                <label htmlFor="Price" className="text-white">Prix</label>
+                                <input name="Price" type="number" defaultValue={0} className="mb-1 border-[1px] border-gray-500 bg-transparent focus:ring-red-b focus:border-transparent" />
+                            </div> 
                         </div>
-                        <input type="submit" value="Créer" className="text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b" />
+
+                        <label htmlFor="description" className="text-center">Description</label>
+                        <textarea name="description" cols={30} rows={5} defaultValue={''} className="mb-1 border-[1px] border-gray-500 bg-transparent focus:ring-red-b focus:border-transparent"/>
+
+                        <input type="submit" value="Créer" className="text-lg font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white" />
                     </form>
                     <button onClick={() => {setNewArticleButton(1)}} className="self-start">
                         <Image

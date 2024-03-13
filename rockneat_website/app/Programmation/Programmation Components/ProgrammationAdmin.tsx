@@ -41,13 +41,13 @@ export default function ProgrammationAdmin({ db_events }: EventsProps) {
     }
 
     return (
-        <div>
-            <div className='flex flex-wrap justify-center'>
-                <button className={ !createButton ? "hidden" : "text-lg bg-black px-3 py-1 mb-2 mt-5 mx-7 shadow shadow-red-b" } onClick={() => {
+        <div className='mb-5'>
+            <div className='flex flex-wrap justify-center mb-2'>
+                <button className={ !createButton ? "hidden" : "mx-4 text-lg font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white" } onClick={() => {
                     setCreateButton(0);
                     setModifyButton(1);
                 }}>Créer un événement</button>
-                <button className={ !modifyButton ? "hidden" : "text-lg bg-black px-3 py-1 mb-2 mt-5 mx-7 shadow shadow-red-b" } onClick={() => {
+                <button className={ !modifyButton ? "hidden" : "mx-4 text-lg font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white" } onClick={() => {
                     setModifyButton(0);
                     setCreateButton(1);
                 }}>Modifier un événement</button>
@@ -63,7 +63,7 @@ export default function ProgrammationAdmin({ db_events }: EventsProps) {
                             <div className='flex flex-col mr-3'>
                                 <label htmlFor="eventList" className='text-center'>Choisissez un événement</label>
                                 <select name="eventList" 
-                                    className="w-[100%] bg-black shadow shadow-red-b border-0 my-3 focus:ring-red-b focus:outline-non" 
+                                    className="w-[100%] bg-black border-1 border-red rounded-sm my-3 focus:ring-red-b focus:outline-none" 
                                     onChange={(event) => {handleEventChose(event)}}
                                 >
                                     { db_events.map((event_db: EventsData) => {
@@ -71,7 +71,7 @@ export default function ProgrammationAdmin({ db_events }: EventsProps) {
                                     })}
                                 </select>
                             </div>
-                            <button onClick={handleDelete} className='h-fit text-lg bg-black px-3 py-1 md:mt-6 shadow shadow-red-b self-center'>
+                            <button onClick={handleDelete} className='self-end mb-3 h-fit text-lg md:mt-6 font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white'>
                                 Suprimer l&apos;événement
                             </button>
                         </div>

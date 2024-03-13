@@ -22,7 +22,7 @@ export default function SubmitButtonPhoto({ html }: SubmitButtonPhotoProps) {
         <button
             type="submit"
             disabled={pending}
-            className="photoPendingButton disabled:animate-pulse w-fit align-middle shadow shadow-red-b bg-black"
+            className="photoPendingButton disabled:animate-pulse w-fit align-middle shadow bg-black"
         >
             {html}
         </button>

@@ -76,7 +76,7 @@ export default function UpdateEventAdmin({ event_db }: EventsProps) {
                                 name="status" 
                                 defaultValue={event_db.status} 
                                 onChange={(event) => {eventForm.set('status', event.target.value)}}
-                                className="bg-black shadow shadow-red-b border-0 mb-1 focus:ring-red-b focus:outline-none"
+                                className="bg-black border-1 border-red rounded-sm focus:ring-red-b focus:outline-none"
                             >
                                 <option value="DISPONIBLE">DISPONIBLE</option>
                                 <option value="COMPLET">COMPLET</option>
@@ -108,7 +108,7 @@ export default function UpdateEventAdmin({ event_db }: EventsProps) {
                         className="hidden"
                         onChange={handleImage}
                     />
-                    <label htmlFor="Image" className="flex flex-row w-fit m-auto text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b">
+                    <label htmlFor="Image" className="flex flex-row w-fit m-auto text-lg font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white">
                         <Image
                             src="/upload.svg"
                             width={40}
@@ -118,7 +118,7 @@ export default function UpdateEventAdmin({ event_db }: EventsProps) {
                         />
                         <p className="text-base">Nouvelle Photo</p>
                     </label>
-                    <input type="submit" className="m-auto w-fit text-lg bg-black px-3 py-1 my-1 shadow shadow-red-b" value="Modifier" />
+                    <input type="submit" className="m-auto w-fit text-lg font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white" value="Modifier" />
                 </div>
             </form>
         </div>
