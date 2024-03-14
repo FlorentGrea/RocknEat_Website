@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </main>
           <footer className='absolute w-full justify-center bottom-0 m-auto text-center'>
             <hr className='w-[90%] sm:w-[73%] lg:w-[48%] mt-6 m-auto border border-red-b' />
-            <p className='py-2'>Site créé par <a href="https://www.linkedin.com/in/florent-grea-3a9b13137/" target='_blank'>Florent Gréa</a></p>
+            <p className='py-2'>Site créé par <a href="https://www.linkedin.com/in/florent-grea-3a9b13137/" target='_blank' className='underline'>Florent Gréa</a></p>
           </footer>
         </body>
       </UserProvider>
