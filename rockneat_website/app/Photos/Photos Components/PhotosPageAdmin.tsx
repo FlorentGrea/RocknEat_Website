@@ -36,6 +36,26 @@ export default function PhotosPageAdmin({ photosDB }: PhotosPageAdminProps) {
                 imgToDelAffiches.push(photo.src)
         })
 
+        async function saveNewJson() {
+            setIsLoading(true); // Set loading state
+    
+            try {
+                const pb = new PocketBase('https://rockneatdb.pockethost.io/')
+    
+                const post_data = {
+                    "json_name": 'photosData',
+                    "json_file": JSON.stringify(arrList)
+                }
+                await pb.collection('Jsons').update('hpvt7kkx079szsb', post_data);
+    
+                console.log('Json modified successfully')
+            } catch (error: any) {
+                console.error('Error modifying json:', error)
+            } finally {
+                setIsLoading(false); // Reset loading state
+            }
+        }
+
         async function deleteImages() {
             setIsLoading(true); // Set loading state
     
@@ -52,6 +72,7 @@ export default function PhotosPageAdmin({ photosDB }: PhotosPageAdminProps) {
                 await pb.collection('Jsons').update('hpvt7kkx079szsb', post_data);
     
                 console.log('Images deleted successfully')
+                saveNewJson()
             } catch (error: any) {
                 console.error('Error deleting images:', error)
             } finally {
@@ -62,6 +83,8 @@ export default function PhotosPageAdmin({ photosDB }: PhotosPageAdminProps) {
         if (imgToDelLieux.length || imgToDelConcerts.length || imgToDelAffiches.length) {
             deleteImages()
         }
+        else
+            saveNewJson()
         setImgToDel([])
         setChangeButton(false)
     }
