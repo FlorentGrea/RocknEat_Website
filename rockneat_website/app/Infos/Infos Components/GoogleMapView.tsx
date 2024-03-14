@@ -27,7 +27,6 @@ export default function GoogleMapView(Infos: any) {
                     />
                 </GoogleMap>
             </LoadScript>
-            GoogleMapView
         </div>
     )
 }

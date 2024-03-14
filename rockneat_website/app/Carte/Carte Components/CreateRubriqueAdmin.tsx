@@ -31,14 +31,14 @@ export default function CreateRubriqueAdmin({ newCarte, setNewCarte }: CreateRub
     }
 
     return (
-        <div className="flex justify-center mb-3">
+        <div className="flex justify-center mb-3 w-full">
             { createButton ? (
                 <button className="text-lg font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white" onClick={() => {setCreateButton(0)}}>
                     Créer une rubrique
                 </button>
             ):(
-                <div className="flex flex-row bg-black/70 bg-black bg-gradient-to-tl from-red/20 via-black to-black shadow-sm shadow-black/30 p-2 mt-3">
-                    <form onSubmit={handleFormSubmit} className="flex flex-col ml-5">
+                <div className="flex flex-row justify-center bg-black/70 bg-black bg-gradient-to-tl from-red/20 via-black to-black shadow-sm shadow-black/30 p-2 mt-3">
+                    <form onSubmit={handleFormSubmit} className="flex flex-col w-[80%] ml-5">
                         <label htmlFor="title" className="text-center">Titre</label>
                         <input className="mb-1 border-[1px] border-gray-500 bg-transparent focus:ring-red-b focus:border-transparent" name="title" required defaultValue='' />
 

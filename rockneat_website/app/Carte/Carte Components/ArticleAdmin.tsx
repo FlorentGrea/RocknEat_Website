@@ -22,7 +22,7 @@ export default function ArticleAdmin({ newCarte, setNewCarte, rubrique, article 
     const [modifyButton, setModifyButton] = useState(1)
 
     return (
-        <div ref={setNodeRef} {...attributes} {...listeners} style={style} className={"flex flex-col group/article " + (article.Description && "mb-3 ")}>
+        <div ref={setNodeRef} {...attributes} {...listeners} style={style} className={"flex flex-col touch-none group/article " + (article.Description && "mb-3 ")}>
             { modifyButton ?
                 <div>
                     <div className="flex flex-row">

@@ -32,9 +32,9 @@ export default async function InfosPage() {
                                     width={40}
                                     height={40}
                                     alt="Mail"
-                                    className="object-contain h-5 w-5 mr-1 mt-1 filter-white pt-1"
+                                    className="object-contain h-5 w-5 mr-1 filter-white pt-1"
                                 />
-                                <p>{Infos.Mail}</p>
+                                <p className='self-center'>{Infos.Mail}</p>
                             </a>
                         </button>
                     )}
@@ -51,9 +51,9 @@ export default async function InfosPage() {
                                     width={40}
                                     height={40}
                                     alt="Mail"
-                                    className="object-contain h-5 w-5 mr-1 mt-1 filter-white pt-1"
+                                    className="object-contain h-5 w-5 mr-1 filter-white pt-1"
                                 />
-                                <p>facebook</p>
+                                <p className='self-center'>facebook</p>
                             </a>
                         </button>
                     )}
@@ -94,7 +94,7 @@ export default async function InfosPage() {
                         <p>{Infos.Velo}</p>
                     </div>
                 )}
-                <div className='w-full justify-end sm:w-[49%] p-2 bg-black bg-gradient-to-tl from-red/20 via-black to-black shadow-sm shadow-black/30 animate-slide-bottom-d5'>
+                <div className='w-full justify-center sm:w-[49%] p-2 bg-black bg-gradient-to-tl from-red/20 via-black to-black shadow-sm shadow-black/30 animate-slide-bottom-d5'>
                     { user ? (
                         <InfosAdmin data={Infos} htmlName='Map' />
                       ):(

@@ -1,7 +1,7 @@
 'use client'
 
-import { DndContext, PointerSensor, closestCenter, useSensor, useSensors } from "@dnd-kit/core"
-import { SortableContext, arrayMove, rectSortingStrategy } from  "@dnd-kit/sortable"
+import { DndContext, KeyboardSensor, PointerSensor, TouchSensor, closestCenter, useSensor, useSensors } from "@dnd-kit/core"
+import { SortableContext, arrayMove, rectSortingStrategy, sortableKeyboardCoordinates } from  "@dnd-kit/sortable"
 import { PhotoData, PhotoList } from "../../types"
 import PhotoAdmin from "./PhotoAdmin";
 import { useId } from "react";
@@ -19,7 +19,11 @@ export default function PhotoDisplayAdmin({ arrList, setArrList, imgToDel, setIm
     let slide = 1
     
     const sensors = useSensors(
-        useSensor(PointerSensor, {activationConstraint: {distance: 2}})
+        useSensor(PointerSensor, {activationConstraint: {distance: 2}}),
+        useSensor(TouchSensor),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
     );
 
     function onDragEnd(event: any) {

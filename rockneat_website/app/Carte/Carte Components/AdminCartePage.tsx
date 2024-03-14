@@ -1,7 +1,7 @@
 'use client'
 
-import { SortableContext, arrayMove, rectSortingStrategy } from  "@dnd-kit/sortable"
-import { PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { SortableContext, arrayMove, rectSortingStrategy, sortableKeyboardCoordinates } from  "@dnd-kit/sortable"
+import { KeyboardSensor, PointerSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { DndContext, closestCenter } from "@dnd-kit/core"
 import CreateRubriqueAdmin from "./CreateRubriqueAdmin";
 import RubriqueAdmin from "./RubriqueAdmin";
@@ -19,7 +19,11 @@ export default function AdminCartePage({ Carte }: AdminCartePageProps) {
     const [isLoading, setIsLoading] = useState(false)
 
     const sensors = useSensors(
-      useSensor(PointerSensor, {activationConstraint: {distance: 2}})
+        useSensor(PointerSensor, {activationConstraint: {distance: 2}}),
+        useSensor(TouchSensor),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
     );
 
     function onDragEnd(event: any) {

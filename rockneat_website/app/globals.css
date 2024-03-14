@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  @font-face {
-    font-family: BS;
-    font-weight: 400;
-    src: url('/fonts/Blessing and Struggle.ttf') format("ttf");
-  }
-}
-
 html {
   color: white;
   background-color: black;

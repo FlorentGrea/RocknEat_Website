@@ -43,7 +43,7 @@ export default function PhotoAdmin({ arrList, setArrList, imgToDel, setImgToDel,
     }
 
     return (
-        <div ref={setNodeRef} {...attributes} {...listeners} style={style} className={`group relative break-inside-avoid w-full mb-2 md:max-h-96 bg-black bg-gradient-to-tl from-red/20 via-black to-black shadow-sm shadow-black/30 p-[2px]`}>
+        <div ref={setNodeRef} {...attributes} {...listeners} style={style} className={`group relative break-inside-avoid w-full touch-none mb-2 md:max-h-96 bg-black bg-gradient-to-tl from-red/20 via-black to-black shadow-sm shadow-black/30 p-[2px]`}>
             <Image
                 src={'https://rockneatdb.pockethost.io/' + 'api/files/Photos/' + photo.p_id + '/' + photo.src}
                 width={1500}

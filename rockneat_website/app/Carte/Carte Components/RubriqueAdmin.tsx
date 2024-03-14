@@ -1,7 +1,7 @@
 'use client'
 
-import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from  "@dnd-kit/sortable"
-import { DndContext, PointerSensor, closestCenter, useSensor, useSensors } from "@dnd-kit/core"
+import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from  "@dnd-kit/sortable"
+import { DndContext, KeyboardSensor, PointerSensor, TouchSensor, closestCenter, useSensor, useSensors } from "@dnd-kit/core"
 import ModifyRubriqueAdmin from "./ModifyRubriqueAdmin";
 import CreateArticleAdmin from "./CreateArticleAdmin";
 import ArticleAdmin from "./ArticleAdmin";
@@ -22,9 +22,13 @@ export default function RubriqueAdmin({ newCarte, setNewCarte, rubrique }: Rubri
         transform: CSS.Translate.toString(transform)
     }
     const [modifyButton, setModifyButton] = useState(1)
-    
+
     const sensors = useSensors(
-        useSensor(PointerSensor, {activationConstraint: {distance: 2}})
+        useSensor(PointerSensor, {activationConstraint: {distance: 2}}),
+        useSensor(TouchSensor),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
     );
 
     function onDragEnd(event: any) {
@@ -43,7 +47,7 @@ export default function RubriqueAdmin({ newCarte, setNewCarte, rubrique }: Rubri
     }
 
     return (
-        <div ref={setNodeRef} {...attributes} {...listeners} style={style} className={`inline-block w-full bg-black bg-gradient-to-tl from-red/20 via-black to-black shadow-sm shadow-black/30 p-3 mb-2`}>
+        <div ref={setNodeRef} {...attributes} {...listeners} style={style} className={`inline-block touch-none w-full bg-black bg-gradient-to-tl from-red/20 via-black to-black shadow-sm shadow-black/30 p-3 mb-2`}>
             { modifyButton ?
                 <div className="relative flex flex-col">
                     <div className="flex flex-row">

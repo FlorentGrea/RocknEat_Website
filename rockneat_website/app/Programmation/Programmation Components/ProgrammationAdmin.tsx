@@ -42,12 +42,12 @@ export default function ProgrammationAdmin({ db_events }: EventsProps) {
 
     return (
         <div className='mb-5'>
-            <div className='flex flex-wrap justify-center mb-2'>
-                <button className={ !createButton ? "hidden" : "mx-4 text-lg font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white" } onClick={() => {
+            <div className='flex flex-wrap justify-center'>
+                <button className={ !createButton ? "hidden" : "mx-4 mb-2 text-lg font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white" } onClick={() => {
                     setCreateButton(0);
                     setModifyButton(1);
                 }}>Créer un événement</button>
-                <button className={ !modifyButton ? "hidden" : "mx-4 text-lg font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white" } onClick={() => {
+                <button className={ !modifyButton ? "hidden" : "mx-4 mb-2 text-lg font-semibold px-3 py-1 bg-black rounded-md border-2 border-red hover:border-white" } onClick={() => {
                     setModifyButton(0);
                     setCreateButton(1);
                 }}>Modifier un événement</button>
