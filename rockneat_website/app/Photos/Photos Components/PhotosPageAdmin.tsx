@@ -49,6 +49,7 @@ export default function PhotosPageAdmin({ photosDB }: PhotosPageAdminProps) {
                 await pb.collection('Jsons').update('hpvt7kkx079szsb', post_data);
     
                 console.log('Json modified successfully')
+                setDefaultData(JSON.parse(JSON.stringify(arrList)))
             } catch (error: any) {
                 console.error('Error modifying json:', error)
             } finally {

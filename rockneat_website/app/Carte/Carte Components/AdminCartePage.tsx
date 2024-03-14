@@ -54,6 +54,7 @@ export default function AdminCartePage({ Carte }: AdminCartePageProps) {
                 await pb.collection('Jsons').update('emip3npy7ntnwse', post_data);
     
                 console.log('Carte Updated successfully')
+                setDefaultCarte(JSON.parse(JSON.stringify(newCarte)))
             } catch (error: any) {
                 console.error('Error updating carte:', error)
             } finally {
